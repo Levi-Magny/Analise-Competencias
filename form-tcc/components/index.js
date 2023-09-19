@@ -10,4 +10,12 @@ function ContainerPurple({children}) {
     )
 }
 
+function Header(props) {
+    return (
+        <div className={styles.containerHeader}>
+            
+        </div>
+    )
+}
+
 export { Layout, ContainerPurple }
