@@ -1,7 +1,18 @@
+import Head from "next/head";
 import '../styles/global.css'
 
 export default function App({ Component, pageProps }) {
     return (
-        <Component {...pageProps} />
+        <>
+            <Head>
+                <title>Aranhacord</title>
+                <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+                <meta property="og:title" content="Analise de Competencias" key="title" />
+                <meta property="og:description" content="Ajude-nos a guiar estudantes em sua jornada acadêmica e profissional." />
+                <meta property="og:url" content="https://analise-competencias.vercel.app/" />
+                <link rel="shortcut icon" href="/favicon.png" />
+            </Head>
+            <Component {...pageProps} />
+        </>
     );
 }
