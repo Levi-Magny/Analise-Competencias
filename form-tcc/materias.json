@@ -1,0 +1,12 @@
+{
+    "materias": [
+        {
+            "codigo": "ECOI32.1",
+            "Nome": "Circuitos Integrados e Analógicos"
+        },
+        {
+            "codigo": "ECOI24",
+            "Nome": "Computação Gráfica e Processamento de Imagens"
+        }
+    ]
+}

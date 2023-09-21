@@ -2,6 +2,8 @@ import Head from 'next/head';
 import styles from '../styles/Home.module.css';
 import Link from 'next/link'
 import { ContainerPurple } from '../components';
+import Header from '../components/header';
+import UserInfo from '../components/formHome';
 
 export default function Home() {
   return (
@@ -13,21 +15,19 @@ export default function Home() {
 
       <main>
         <ContainerPurple>
+          <Header/>
           <h1 className={styles.title}>
-            <Link href="/posts/first-post">Título da Ferramenta</Link>
+            Título da Ferramenta
+            <span>Ajude-nos a guiar estudantes em sua jornada acadêmica e profissional.</span>
           </h1>
+          <div className={styles.arrow}>
+            <img src="/arrow.svg"/>
+          </div>
         </ContainerPurple>
+        <UserInfo/>
       </main>
 
       <footer>
-        <a
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{' '}
-          <img src="/vercel.svg" alt="Vercel" className={styles.logo} />
-        </a>
       </footer>
     </div>
   );

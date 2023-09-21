@@ -1,5 +1,6 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Julius+Sans+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 
 .container {
   min-height: 100vh;
@@ -9,7 +10,7 @@
   align-items: center;
 }
 
-.title a {
+.title {
   color: #FFF;
   font-family: 'Julius Sans One', sans-serif;
   font-size: 3.5rem;
@@ -17,6 +18,13 @@
   font-weight: 400;
   line-height: normal;
   text-decoration: none;
+}
+
+.title span {
+  display: block;
+  font-family: 'Roboto', Arial, Helvetica, sans-serif;
+  font-weight: 100;
+  font-size: 1.1rem;
 }
 
 .title a:hover,
@@ -43,6 +51,14 @@
 .description {
   line-height: 1.5;
   font-size: 1.5rem;
+}
+
+.arrow {
+  color: #FFF;
+  display: block;
+
+  display: flex;
+  justify-content: center;
 }
 
 .grid {
