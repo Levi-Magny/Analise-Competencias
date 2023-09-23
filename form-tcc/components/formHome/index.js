@@ -1,8 +1,26 @@
+'use client';
+
 import { Box, Button, Container, Grid, MenuItem } from "@mui/material"
 import TextField from "@mui/material/TextField"
-import dados from '../../materias.json'
+import dados from '../../data/materias.json'
+import { useRouter } from 'next/router';
+import { FormContext, useFormContext } from "../../contexts/formcontext";
+import { useContext, useEffect } from "react";
 
-const UserInfo = () => {
+const UserInfo = ({setSubmitted}) => {
+    const rotas = useRouter();
+    const {formData, setFormData, docente, setDocente} = useFormContext()
+
+    useEffect(() => {
+        const formS = JSON.parse(localStorage.getItem("form"));
+        setFormData(formS);
+        setDocente(formS.docente)
+    }, [])
+
+    useEffect(() => {
+        localStorage.setItem("form", JSON.stringify(formData));
+    }, [formData, docente])
+
     return (
         <Container component="main" maxWidth="md">
             <Box 
@@ -20,6 +38,13 @@ const UserInfo = () => {
                         mt: 3,
                         width:'40vw' 
                     }}
+                    onSubmit={(event)=>{
+                        event.preventDefault();
+                        setSubmitted(true);
+                        setTimeout(() => {
+                        rotas.push('/ementa');
+                        }, 500);
+                    }}
                 >
                     <Grid container spacing={2}>
                         <Grid item xs={12}>
@@ -29,8 +54,15 @@ const UserInfo = () => {
                                 required
                                 fullWidth
                                 id="name"
-                                label="Nome Completo"
+                                label="Docente"
                                 autoFocus
+                                value={docente}
+                                onChange={(event) => {
+                                    let data = formData;
+                                    data.docente = event.target.value
+                                    setDocente(event.target.value)
+                                    setFormData(data)
+                                }}
                             />
                         </Grid>
                         <Grid item xs={12}>
@@ -41,12 +73,19 @@ const UserInfo = () => {
                                 id="component"
                                 label="Componente Curricular"
                                 select
-                                defaultValue="ECOI32.1"
+                                defaultValue="0"
                                 placeholder="Selecione"
                                 autoFocus
+                                value={formData.materia}
+                                onChange={(event) => {
+                                    let data = formData;
+                                    data.materia = event.target.value
+                                    setFormData(data)
+                                    localStorage.setItem("form", JSON.stringify(data));
+                                }}
                             >
                                 {dados.materias.map((materia) => (
-                                    <MenuItem key={materia.codigo} value={materia.codigo}>
+                                    <MenuItem key={materia.id} value={materia.id}>
                                         {materia.Nome}
                                     </MenuItem>
                                 ))}
@@ -71,4 +110,4 @@ const UserInfo = () => {
     )
 }
 
-export default UserInfo
+export default UserInfo;

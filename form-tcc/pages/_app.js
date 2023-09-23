@@ -1,5 +1,6 @@
 import Head from "next/head";
 import '../styles/global.css'
+import { FormProvider } from "../contexts/formcontext";
 
 export default function App({ Component, pageProps }) {
     return (
@@ -12,7 +13,9 @@ export default function App({ Component, pageProps }) {
                 <meta property="og:url" content="https://analise-competencias.vercel.app/" />
                 <link rel="shortcut icon" href="/favicon.png" />
             </Head>
-            <Component {...pageProps} />
+            <FormProvider>
+                <Component {...pageProps} />
+            </FormProvider>
         </>
     );
 }
