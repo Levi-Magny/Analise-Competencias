@@ -13,8 +13,10 @@ const UserInfo = ({setSubmitted}) => {
 
     useEffect(() => {
         const formS = JSON.parse(localStorage.getItem("form"));
-        setFormData(formS);
-        setDocente(formS.docente)
+        if(formS){
+            setFormData(formS);
+            setDocente(formS.docente)
+        }
     }, [])
 
     useEffect(() => {
