@@ -82,7 +82,7 @@ const UserInfo = ({setSubmitted}) => {
                                 onChange={(event) => {
                                     let data = formData;
                                     data.materia = event.target.value
-                                    setFormData(data)
+                                    setFormData({...data})
                                     localStorage.setItem("form", JSON.stringify(data));
                                 }}
                             >

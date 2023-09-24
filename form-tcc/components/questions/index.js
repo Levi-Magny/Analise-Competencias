@@ -107,8 +107,11 @@ const Questions = () =>{
                     mt: "1rem"
                 }}>
                     <Button
+                        disabled={currentQuestion==0}
                         sx={{
                             padding:'.5rem 2rem',
+                            borderRadius: '.5rem',
+                            minWidth: '12rem',
                             color:"#FFF",
                             backgroundColor:"#7A5DAB",
                             ":hover":{
@@ -125,6 +128,8 @@ const Questions = () =>{
                     <Button
                         sx={{
                             padding:'.5rem 2rem',
+                            borderRadius: '.5rem',
+                            minWidth: '12rem',
                             color:"#FFF",
                             backgroundColor:"#7A5DAB",
                             ":hover":{
@@ -133,10 +138,11 @@ const Questions = () =>{
                             }
                         }}
                         onClick={() => {
+                          if(currentQuestion + 1 < ementa[formData.materia].length)
                             setCurrentQuestion(currentQuestion+1)
                         }}
                     >
-                        Próximo
+                        {currentQuestion + 1 < ementa[formData.materia].length ? 'Próximo' : 'Enviar'}
                     </Button>
                 </Box>
                 {/* Stepper */}

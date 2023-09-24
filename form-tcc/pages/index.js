@@ -24,7 +24,7 @@ export default function Home() {
             subtitle="Ajude-nos a guiar estudantes em sua jornada acadêmica e profissional."
           />
           <div className={styles.arrow}>
-            <img src="/arrow.svg"/>
+            <img src="/arrow.svg" className={isSubmitted ? styles.rotate : ''}/>
           </div>
         </ContainerPurple>
         <UserInfo setSubmitted={setIsSubmitted}/>

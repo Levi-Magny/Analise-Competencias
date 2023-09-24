@@ -23,6 +23,15 @@
   justify-content: center;
 }
 
+.arrow img {
+  transition: transform 0.5s ease;
+  scale: .8;
+}
+
+.rotate {
+  transform: rotate(180deg);
+}
+
 .grid {
   display: flex;
   align-items: center;

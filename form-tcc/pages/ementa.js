@@ -30,7 +30,7 @@ const MainForm = () => {
             />
             <Questions/>
             <div className={styles.arrow}>
-            <img src="/arrow.svg"/>
+            <img src="/arrow.svg" className={styles.rotate}/>
             </div>
         </ContainerPurple>
 
