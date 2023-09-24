@@ -5,6 +5,7 @@ import Title from "../components/title";
 import { useFormContext } from '../contexts/formcontext';
 import { useEffect } from 'react';
 import Questions from '../components/questions';
+import Head from 'next/head';
 
 
 const MainForm = () => {
@@ -18,7 +19,10 @@ const MainForm = () => {
         }
     }, [])
     return(
-        <ContainerPurple height="90vh">
+        <ContainerPurple height="95vh">
+            <Head>
+                <title>Ementa</title>
+            </Head>
             <Header/>
             <Title
             title={`Olá, ${docente}`}

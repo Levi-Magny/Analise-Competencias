@@ -9,7 +9,7 @@ const QuestionText = styled.h4`
   font-family: 'Roboto', helvetica, sans-serif;
   color: ${(props) => props.color || '#FFF'};
   margin: 0;
-  padding: 1rem;
+  padding: .5rem;
 `
 
 const ContainerPurple = styled.div`
@@ -26,7 +26,7 @@ const ContainerPurple = styled.div`
   transition: .5s;
 
   &.on-submit {
-    height: 90vh;
+    height: 95vh;
   }
 `;
 
