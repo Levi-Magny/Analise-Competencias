@@ -20,6 +20,7 @@ const Description = styled.div`
   width: 6rem;
   min-height: 8rem;
   font-size: .8rem;
+  font-weight: 800;
   
   display: flex;
   flex-direction: column;
@@ -31,6 +32,11 @@ const Description = styled.div`
   &.disabled {
     opacity: 0;
     visibility: hidden;
+  }
+
+  p {
+    line-height: 1rem;
+    font-weight: 400;
   }
 
 `;

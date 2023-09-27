@@ -1,0 +1,112 @@
+{
+    "matrix": [
+        [
+            {
+                "title": "Listar",
+                "description": "Fazer uma síntese do conteúdo apresentado"
+            },
+            {
+                "title": "Reconhecer",
+                "description": ""
+            },
+            {
+                "title": "Lembrar",
+                "description": ""
+            },
+            {
+                "title": "Identificar",
+                "description": ""
+            }
+        ],
+        [
+            {
+                "title": "Resumir",
+                "description": ""
+            },
+            {
+                "title": "Classificar",
+                "description": ""
+            },
+            {
+                "title": "Esclarecer",
+                "description": ""
+            },
+            {
+                "title": "Predizer",
+                "description": ""
+            }
+        ],
+        [
+            {
+                "title": "Responder",
+                "description": ""
+            },
+            {
+                "title": "Fornecer",
+                "description": ""
+            },
+            {
+                "title": "Realizar",
+                "description": ""
+            },
+            {
+                "title": "Usar",
+                "description": ""
+            }
+        ],
+        [
+            {
+                "title": "Selecionar",
+                "description": ""
+            },
+            {
+                "title": "Diferenciar",
+                "description": ""
+            },
+            {
+                "title": "Integrar",
+                "description": ""
+            },
+            {
+                "title": "Desconstruir",
+                "description": ""
+            }
+        ],
+        [
+            {
+                "title": "Verificar",
+                "description": ""
+            },
+            {
+                "title": "Determinar",
+                "description": ""
+            },
+            {
+                "title": "Julgar",
+                "description": ""
+            },
+            {
+                "title": "Refletir",
+                "description": ""
+            }
+        ],
+        [
+            {
+                "title": "Gerar",
+                "description": ""
+            },
+            {
+                "title": "Reunir",
+                "description": ""
+            },
+            {
+                "title": "Projetar",
+                "description": ""
+            },
+            {
+                "title": "Criar",
+                "description": ""
+            }
+        ]
+    ]
+}

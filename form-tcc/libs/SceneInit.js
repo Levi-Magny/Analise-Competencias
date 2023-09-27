@@ -1,14 +1,19 @@
 import * as THREE from 'three'
 import {OrbitControls} from 'three/examples/jsm/controls/OrbitControls';
 import Stats from 'three/examples/jsm/libs/stats.module';
+import { TTFLoader } from 'three/examples/jsm/loaders/TTFLoader';
+import { FontLoader } from 'three/examples/jsm/loaders/FontLoader';
+import { TextGeometry } from 'three/examples/jsm/geometries/TextGeometry'
 import MouseMeshInteraction from './three_mmi';
+import blooms from '../data/blooms.json';
 
 export default class SceneInit {
-    constructor(canvasId, canvasContainer, dimentions) {
+    constructor(canvasId, canvasContainer, dimentions, setCurrentIndex) {
         this.canvasId = canvasId;
         this.canvas = document.getElementById(this.canvasId);
         this.canvasContainer = canvasContainer;
         this.dimentions = dimentions;
+        this.setReactIndex = setCurrentIndex;
 
         this.boxes = [];
         this.current_index = [0, 0];
@@ -121,6 +126,18 @@ export default class SceneInit {
             x = -30;
             z -= gap;
         }
+
+        this.createText('Lembrar', -33);
+        this.createText('Entender', -23);
+        this.createText('Aplicar', -13);
+        this.createText('Analisar', -3);
+        this.createText('Avaliar', 7);
+        this.createText('Criar', 17);
+
+        this.createText('Factual', -52, 23, [-3.14/2, 0]);
+        this.createText('Conceitual', -59, 13, [-3.14/2, 0]);
+        this.createText('Procedural', -60, 3, [-3.14/2, 0]);
+        this.createText('Metacognitivo', -66, -7, [-3.14/2, 0]);
         
         // Add mouse handlers
 
@@ -131,6 +148,8 @@ export default class SceneInit {
         this.mmi.addHandler('box', 'mouseenter', (mesh) => {
             mesh.material.color = this.highLightColor;
             this.current_index = mesh.userData.index;
+            // this.descriptionBox.innerText = blooms["matrix"][this.current_index[1]][this.current_index[0]]['title'];
+            this.setReactIndex([this.current_index[1],this.current_index[0]]);
             this.descriptionBox.classList.remove('disabled');
             // console.log();
         })
@@ -145,5 +164,27 @@ export default class SceneInit {
         this.camera.aspect = this.dimentions[0] / this.dimentions[1];
         this.camera.updateProjectionMatrix();
         this.renderer.setSize(this.dimentions[0], this.dimentions[1]);
+    }
+
+    createText(text, xPos, zPos=28, Rotate=[-3.14/2,-3.14/2]){
+        const fontLoader = new FontLoader();
+        fontLoader.load(
+          'fonts/droid_serif_regular.typeface.json',
+          (droidFont) => {
+            const textGeometry = new TextGeometry(text, {
+              size: 3,
+              height: .5,
+              font: droidFont,
+            });
+            const textMaterial = new THREE.MeshMatcapMaterial({ color: this.highLightColor});
+            const textMesh = new THREE.Mesh(textGeometry, textMaterial);
+            textMesh.position.x = xPos;
+            textMesh.position.y = 0;
+            textMesh.position.z = zPos;
+            textMesh.rotateX(Rotate[0])
+            textMesh.rotateZ(Rotate[1])
+            this.scene.add(textMesh);
+          }
+        );
     }
 }

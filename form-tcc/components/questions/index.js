@@ -2,6 +2,7 @@ import { Box, Step, StepLabel, Stepper, colors, Stack, Button } from "@mui/mater
 import { Description, QuestionText } from ".."
 import { useFormContext } from "../../contexts/formcontext"
 import ementa from '../../data/ementa.json'
+import blooms from '../../data/blooms.json'
 import { useEffect, useState } from "react"
 
 import Check from '@mui/icons-material/Check';
@@ -71,12 +72,15 @@ function QontoStepIcon(props) {
 }
 
 const Questions = () => {
-  const { formData, setFormData } = useFormContext()
-  const [currentQuestion, setCurrentQuestion] = useState(0)
+  const { formData, setFormData } = useFormContext();
+  const [currentQuestion, setCurrentQuestion] = useState(0);
+  const [currentIndex, setCurrentIndex] = useState([0,0]);
+
+  const bloomMatrix = blooms['matrix'];
 
   useEffect(() => {
     let dimentions = [window.innerWidth, 360]
-    const test = new SceneInit('myThreeJsCanvas', 'canvasContainer', dimentions);
+    const test = new SceneInit('myThreeJsCanvas', 'canvasContainer', dimentions, setCurrentIndex);
     test.initialize();
     test.animate();
     test.createMesh();
@@ -104,9 +108,12 @@ const Questions = () => {
         }}
       >
         {/* Aqui vai o diagrama da Taxonomia de Bloom */}
-        <Description id="description">Lorem ipsum dolor amet...</Description>
+        <Description id="description" className='disabled'>
+          {bloomMatrix[currentIndex[0]][currentIndex[1]]['title']}
+          <p>{bloomMatrix[currentIndex[0]][currentIndex[1]]['description']}</p>
+        </Description>
         <div id="canvasContainer">
-          <canvas id="myThreeJsCanvas" />
+          <canvas id="myThreeJsCanvas"/>
         </div>
       </Box>
       {/* Container com os botões e 'steps' */}
