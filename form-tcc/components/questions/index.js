@@ -75,16 +75,11 @@ const Questions = () => {
   const [currentQuestion, setCurrentQuestion] = useState(0)
 
   useEffect(() => {
-    const test = new SceneInit('myThreeJsCanvas', 'canvasContainer');
+    let dimentions = [window.innerWidth, 360]
+    const test = new SceneInit('myThreeJsCanvas', 'canvasContainer', dimentions);
     test.initialize();
     test.animate();
-
-    const boxGeometry = new THREE.BoxGeometry(30,30,30);
-    const boxMaterial = new THREE.MeshNormalMaterial();
-    const boxMesh = new THREE.Mesh(boxGeometry, boxMaterial);
-
-    test.scene.add(boxMesh);
-
+    test.createMesh();
     // const stats = Stats();
     // document.body.appendChild(stats.dom);
   }, []);
