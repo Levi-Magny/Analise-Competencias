@@ -12,6 +12,29 @@ const QuestionText = styled.h4`
   padding: .5rem;
 `
 
+const Description = styled.div`
+  position: absolute;
+  z-index: 100;
+  background: #f2f2f2;
+  border-radius: .3rem;
+  width: 6rem;
+  min-height: 8rem;
+  font-size: .8rem;
+  
+  display: flex;
+  flex-direction: column;
+  alignItems: center;
+
+  padding: .5rem;
+  transition: .5s;
+
+  &.disabled {
+    opacity: 0;
+    visibility: hidden;
+  }
+
+`;
+
 const ContainerPurple = styled.div`
   width: 100%;
   height: ${(props) => props.height || '50vh'}; /* Altura personalizável */
@@ -30,4 +53,4 @@ const ContainerPurple = styled.div`
   }
 `;
 
-export { Layout, ContainerPurple, QuestionText }
+export { Layout, ContainerPurple, QuestionText, Description }

@@ -1,5 +1,5 @@
 import { Box, Step, StepLabel, Stepper, colors, Stack, Button } from "@mui/material"
-import { QuestionText } from ".."
+import { Description, QuestionText } from ".."
 import { useFormContext } from "../../contexts/formcontext"
 import ementa from '../../data/ementa.json'
 import { useEffect, useState } from "react"
@@ -104,6 +104,7 @@ const Questions = () => {
         }}
       >
         {/* Aqui vai o diagrama da Taxonomia de Bloom */}
+        <Description id="description">Lorem ipsum dolor amet...</Description>
         <div id="canvasContainer">
           <canvas id="myThreeJsCanvas" />
         </div>

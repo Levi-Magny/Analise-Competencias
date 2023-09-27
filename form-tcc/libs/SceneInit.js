@@ -6,8 +6,12 @@ import MouseMeshInteraction from './three_mmi';
 export default class SceneInit {
     constructor(canvasId, canvasContainer, dimentions) {
         this.canvasId = canvasId;
+        this.canvas = document.getElementById(this.canvasId);
         this.canvasContainer = canvasContainer;
         this.dimentions = dimentions;
+
+        this.boxes = [];
+        this.current_index = [0, 0];
 
         this.highLightColor = new THREE.Color(0xfdfeff);
         this.colors = [
@@ -32,10 +36,8 @@ export default class SceneInit {
         this.camera.position.setZ(50)
         this.camera.position.setX(-45)
         this.camera.position.setY(50)
-
-        const canvas = document.getElementById(this.canvasId);
         this.renderer = new THREE.WebGLRenderer({
-        canvas,
+        canvas: this.canvas,
         antialias: true,
         alpha: true,
         });
@@ -60,6 +62,11 @@ export default class SceneInit {
         window.addEventListener('ended', () => {
             this.mmi.destructor()
         })
+
+        // Position textbox
+
+        this.descriptionBox = document.getElementById('description');
+        this.boxPosition = new THREE.Vector3();
     }
 
     animate() {
@@ -73,7 +80,20 @@ export default class SceneInit {
     render() {
         // NOTE: Update uniform data on each render.
         // this.uniforms.u_time.value += this.clock.getDelta();
+        if(this.boxes.length > 0){
+            let model = this.boxes[this.current_index[0]][this.current_index[1]];
+            this.boxPosition.setFromMatrixPosition(model.matrixWorld);
+            this.boxPosition.project(this.camera);
+            let widthHalf = window.innerWidth / 2, heightHalf = (this.canvas.height + this.canvas.getBoundingClientRect().top) / 2;
+            
+            this.boxPosition.x = (this.boxPosition.x * widthHalf) + widthHalf;
+            this.boxPosition.y = -(this.boxPosition.y * heightHalf) + heightHalf;
+            
+            this.descriptionBox.style.top = `${this.boxPosition.y}px`;
+            this.descriptionBox.style.left = `${this.boxPosition.x}px`;
+        }
         this.renderer.render(this.scene, this.camera);
+
         this.mmi.update();
     }
 
@@ -82,6 +102,7 @@ export default class SceneInit {
         let x = -30;
         let z = 20
         for(let i = 0; i < 4; i++){
+            this.boxes.push([]);
             for(let j = 0; j < 6; j++){    
                 const boxGeometry = new THREE.BoxGeometry(10,5 + 2*j + 2*i,10);
                 const boxMaterial = new THREE.MeshMatcapMaterial({ color: this.colors[j] });
@@ -90,7 +111,10 @@ export default class SceneInit {
                 boxMesh.position.set(x, j + i, z);
 
                 boxMesh.userData.color = this.colors[j];
+                boxMesh.userData.index = [i,j];
                 
+                this.boxes[i].push(boxMesh);
+
                 this.scene.add(boxMesh);
                 x += gap;
             }
@@ -98,17 +122,22 @@ export default class SceneInit {
             z -= gap;
         }
         
-        
+        // Add mouse handlers
+
         this.mmi.addHandler('box', 'click', (mesh) => {
             console.log("cliquei na caixa!");
         })
 
         this.mmi.addHandler('box', 'mouseenter', (mesh) => {
             mesh.material.color = this.highLightColor;
+            this.current_index = mesh.userData.index;
+            this.descriptionBox.classList.remove('disabled');
+            // console.log();
         })
 
         this.mmi.addHandler('box', 'mouseleave', (mesh) => {
             mesh.material.color = mesh.userData.color;
+            this.descriptionBox.classList.add('disabled');
         })
     }
 
