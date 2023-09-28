@@ -39,7 +39,7 @@ const Description = styled.div`
     font-weight: 400;
   }
 
-`;
+  `;
 
 const ContainerPurple = styled.div`
   width: 100%;
@@ -57,6 +57,17 @@ const ContainerPurple = styled.div`
   &.on-submit {
     height: 95vh;
   }
+
+  /* Estilos para telas menores (exemplo: até 768px de largura) */
+  @media (max-width: 768px) {
+    height: 100%;
+    padding: 0 .5rem .5rem .5rem;
+
+    &.on-submit {
+      height: 100vh;
+    }
+  }
 `;
+
 
 export { Layout, ContainerPurple, QuestionText, Description }

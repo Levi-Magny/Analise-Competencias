@@ -38,7 +38,7 @@ const UserInfo = ({setSubmitted}) => {
                     noValidate
                     sx={{ 
                         mt: 3,
-                        width:'40vw' 
+                        width: '60vw'
                     }}
                     onSubmit={(event)=>{
                         event.preventDefault();
@@ -48,8 +48,8 @@ const UserInfo = ({setSubmitted}) => {
                         }, 500);
                     }}
                 >
-                    <Grid container spacing={2}>
-                        <Grid item xs={12}>
+                    <Grid container spacing={1} sx={{alignItems: "center", justifyContent: "center"}}>
+                        <Grid item xs={12} sm={8}>
                             <TextField
                                 autoComplete="given-name"
                                 name="Name"
@@ -67,7 +67,7 @@ const UserInfo = ({setSubmitted}) => {
                                 }}
                             />
                         </Grid>
-                        <Grid item xs={12}>
+                        <Grid item xs={12} sm={8}>
                             <TextField
                                 name="componente"
                                 required
@@ -93,19 +93,20 @@ const UserInfo = ({setSubmitted}) => {
                                 ))}
                             </TextField>
                         </Grid>
+                        <Grid item xs={12} sm={8}>
+                            <Button
+                                type="submit"
+                                fullWidth
+                                variant="contained"
+                                sx={{
+                                    mb: 2,
+                                    backgroundColor: '#7A5DAB',
+                                }}
+                            >
+                                Iniciar
+                            </Button>
+                        </Grid>
                     </Grid>
-                    <Button
-                        type="submit"
-                        fullWidth
-                        variant="contained"
-                        sx={{
-                            mt: 3,
-                            mb: 2,
-                            backgroundColor: '#7A5DAB',
-                        }}
-                    >
-                        Iniciar
-                    </Button>
                 </Box>
             </Box>
         </Container>

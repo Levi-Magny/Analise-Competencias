@@ -33,14 +33,14 @@ export default class SceneInit {
         this.scene = new THREE.Scene();
 
         this.camera = new THREE.PerspectiveCamera(
-        55,
+        60,
         this.dimentions[0] / this.dimentions[1],
         1,
         1000
         );
-        this.camera.position.setZ(50)
-        this.camera.position.setX(-45)
-        this.camera.position.setY(50)
+        this.camera.position.setZ(60)
+        this.camera.position.setX(-60)
+        this.camera.position.setY(40)
         this.renderer = new THREE.WebGLRenderer({
         canvas: this.canvas,
         antialias: true,
@@ -97,8 +97,9 @@ export default class SceneInit {
             this.descriptionBox.style.top = `${this.boxPosition.y}px`;
             this.descriptionBox.style.left = `${this.boxPosition.x}px`;
         }
+        // this.renderer.setSize(window.innerWidth, this.dimentions[1]);
+        // this.camera.aspect = window.innerWidth / this.dimentions[1];
         this.renderer.render(this.scene, this.camera);
-
         this.mmi.update();
     }
 
@@ -161,9 +162,9 @@ export default class SceneInit {
     }
 
     onWindowResize() {
-        this.camera.aspect = this.dimentions[0] / this.dimentions[1];
+        this.camera.aspect = window.innerWidth / this.dimentions[1];
         this.camera.updateProjectionMatrix();
-        this.renderer.setSize(this.dimentions[0], this.dimentions[1]);
+        this.renderer.setSize(window.innerWidth, this.dimentions[1]);
     }
 
     createText(text, xPos, zPos=28, Rotate=[-3.14/2,-3.14/2]){

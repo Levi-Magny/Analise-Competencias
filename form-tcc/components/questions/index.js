@@ -112,7 +112,7 @@ const Questions = () => {
           {bloomMatrix[currentIndex[0]][currentIndex[1]]['title']}
           <p>{bloomMatrix[currentIndex[0]][currentIndex[1]]['description']}</p>
         </Description>
-        <div id="canvasContainer">
+        <div id="canvasContainer" style={{overflow: 'unset'}}>
           <canvas id="myThreeJsCanvas"/>
         </div>
       </Box>
@@ -136,7 +136,7 @@ const Questions = () => {
             sx={{
               padding: '.5rem 2rem',
               borderRadius: '.5rem',
-              minWidth: '12rem',
+              minWidth: '8rem',
               color: "#FFF",
               backgroundColor: "#7A5DAB",
               ":hover": {
@@ -154,7 +154,7 @@ const Questions = () => {
             sx={{
               padding: '.5rem 2rem',
               borderRadius: '.5rem',
-              minWidth: '12rem',
+              minWidth: '8rem',
               color: "#FFF",
               backgroundColor: "#7A5DAB",
               ":hover": {
