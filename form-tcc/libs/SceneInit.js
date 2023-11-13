@@ -8,17 +8,20 @@ import MouseMeshInteraction from './three_mmi';
 import blooms from '../data/blooms.json';
 
 export default class SceneInit {
-    constructor(canvasId, canvasContainer, dimentions, setCurrentIndex) {
+    constructor(canvasId, canvasContainer, dimensions, setCurrentIndex, setSelectedIndex) {
         this.canvasId = canvasId;
         this.canvas = document.getElementById(this.canvasId);
         this.canvasContainer = canvasContainer;
-        this.dimentions = dimentions;
+        this.dimensions = dimensions;
         this.setReactIndex = setCurrentIndex;
+        this.setReactSelectedIndex = setSelectedIndex;
 
         this.boxes = [];
         this.current_index = [0, 0];
+        this.selected_item = null
 
         this.highLightColor = new THREE.Color(0xfdfeff);
+        this.selectedColor = new THREE.Color(0xEF476F);
         this.colors = [
             new THREE.Color(0xa8b5fa),
             new THREE.Color(0xa8fab5),
@@ -27,6 +30,7 @@ export default class SceneInit {
             new THREE.Color(0xfad199),
             new THREE.Color(0xef87a1),
         ];
+        this.clear_selection()
     }
 
     initialize() {
@@ -34,7 +38,7 @@ export default class SceneInit {
 
         this.camera = new THREE.PerspectiveCamera(
         60,
-        this.dimentions[0] / this.dimentions[1],
+        this.dimensions[0] / this.dimensions[1],
         1,
         1000
         );
@@ -50,7 +54,7 @@ export default class SceneInit {
         this.controls = new OrbitControls(this.camera, this.renderer.domElement);
         
         this.scene.background = null;
-        this.renderer.setSize(this.dimentions[0], this.dimentions[1]);
+        this.renderer.setSize(this.dimensions[0], this.dimensions[1]);
         document.getElementById(this.canvasContainer).appendChild(this.renderer.domElement);
 
         this.ambientLight = new THREE.AmbientLight(0xffffff, 1);
@@ -97,8 +101,8 @@ export default class SceneInit {
             this.descriptionBox.style.top = `${this.boxPosition.y}px`;
             this.descriptionBox.style.left = `${this.boxPosition.x}px`;
         }
-        // this.renderer.setSize(window.innerWidth, this.dimentions[1]);
-        // this.camera.aspect = window.innerWidth / this.dimentions[1];
+        // this.renderer.setSize(window.innerWidth, this.dimensions[1]);
+        // this.camera.aspect = window.innerWidth / this.dimensions[1];
         this.renderer.render(this.scene, this.camera);
         this.mmi.update();
     }
@@ -106,7 +110,7 @@ export default class SceneInit {
     createMesh() {
         const gap = 10;
         let x = -30;
-        let z = 20
+        let z = 20;
         for(let i = 0; i < 4; i++){
             this.boxes.push([]);
             for(let j = 0; j < 6; j++){    
@@ -143,28 +147,40 @@ export default class SceneInit {
         // Add mouse handlers
 
         this.mmi.addHandler('box', 'click', (mesh) => {
-            console.log("cliquei na caixa!");
+            if(this.selected_item == mesh){
+                mesh.material.color = mesh.userData.color;
+                this.selected_item = null;
+            } else {
+                this.clear_selection()
+                this.selected_item = mesh;
+                mesh.material.color = this.selectedColor;
+            }
+            this.setReactSelectedIndex(this.selected_item ? this.selected_item.userData.index : null);
         })
 
         this.mmi.addHandler('box', 'mouseenter', (mesh) => {
-            mesh.material.color = this.highLightColor;
-            this.current_index = mesh.userData.index;
-            // this.descriptionBox.innerText = blooms["matrix"][this.current_index[1]][this.current_index[0]]['title'];
-            this.setReactIndex([this.current_index[1],this.current_index[0]]);
-            this.descriptionBox.classList.remove('disabled');
-            // console.log();
+            if (mesh!=this.selected_item){
+                mesh.material.color = this.highLightColor;
+            }
+                this.current_index = mesh.userData.index;
+                // this.descriptionBox.innerText = blooms["matrix"][this.current_index[1]][this.current_index[0]]['title'];
+                this.setReactIndex([this.current_index[1],this.current_index[0]]);
+                this.descriptionBox.classList.remove('disabled');
+                // console.log();
         })
 
         this.mmi.addHandler('box', 'mouseleave', (mesh) => {
-            mesh.material.color = mesh.userData.color;
+            if(this.selected_item != mesh)
+            {mesh.material.color = mesh.userData.color;
             this.descriptionBox.classList.add('disabled');
+        }
         })
     }
 
     onWindowResize() {
-        this.camera.aspect = window.innerWidth / this.dimentions[1];
+        this.camera.aspect = window.innerWidth / this.dimensions[1];
         this.camera.updateProjectionMatrix();
-        this.renderer.setSize(window.innerWidth, this.dimentions[1]);
+        this.renderer.setSize(window.innerWidth, this.dimensions[1]);
     }
 
     createText(text, xPos, zPos=28, Rotate=[-3.14/2,-3.14/2]){
@@ -187,5 +203,24 @@ export default class SceneInit {
             this.scene.add(textMesh);
           }
         );
+    }
+
+    clear_selection(){
+        if (this.selected_item != null){
+            this.selected_item.material.color = this.selected_item.userData.color;
+        }
+        this.selected_item = null;
+    }
+
+    set_selected_item(index){
+        let box = this.find_item_by_index(index);
+        this.clear_selection()
+        box.material.color = this.selectedColor;
+        this.setReactSelectedIndex(box.userData.index);
+        this.selected_item = box;
+    }
+
+    find_item_by_index(index){
+        return this.boxes[index[0]][index[1]];
     }
 }

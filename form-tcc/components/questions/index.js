@@ -1,7 +1,7 @@
 import { Box, Step, StepLabel, Stepper, colors, Stack, Button } from "@mui/material"
 import { Description, QuestionText } from ".."
 import { useFormContext } from "../../contexts/formcontext"
-import ementa from '../../data/ementa.json'
+import competencias from '../../data/competencias.json'
 import blooms from '../../data/blooms.json'
 import { useEffect, useState } from "react"
 
@@ -9,7 +9,7 @@ import Check from '@mui/icons-material/Check';
 import StepConnector, { stepConnectorClasses } from '@mui/material/StepConnector';
 import { styled } from '@mui/material/styles';
 import SceneInit from "../../libs/SceneInit"
-import * as THREE from 'three'
+// import * as THREE from 'three'
 
 const QontoConnector = styled(StepConnector)(({ theme }) => ({
   [`&.${stepConnectorClasses.alternativeLabel}`]: {
@@ -75,16 +75,17 @@ const Questions = () => {
   const { formData, setFormData } = useFormContext();
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [currentIndex, setCurrentIndex] = useState([0,0]);
-
+  const [selectedIndex, setSelectedIndex] = useState(null)
+  const [scene, setScene] = useState(null)
   const bloomMatrix = blooms['matrix'];
 
   useEffect(() => {
     let dimentions = [window.innerWidth, 360]
-    const test = new SceneInit('myThreeJsCanvas', 'canvasContainer', dimentions, setCurrentIndex);
-    test.initialize();
-    test.animate();
-    test.createMesh();
-    // const stats = Stats();
+    const Scene3d = new SceneInit('myThreeJsCanvas', 'canvasContainer', dimentions, setCurrentIndex, setSelectedIndex);
+    Scene3d.initialize();
+    Scene3d.animate();
+    Scene3d.createMesh();
+    setScene(Scene3d);
     // document.body.appendChild(stats.dom);
   }, []);
 
@@ -96,7 +97,7 @@ const Questions = () => {
         alignItems: "center"
       }}
     >
-      <QuestionText>{ementa[formData.materia][currentQuestion]}</QuestionText>
+      <QuestionText>{competencias["lista"][currentQuestion]}</QuestionText>
       <Box
         sx={{
           height: "20rem",
@@ -145,12 +146,17 @@ const Questions = () => {
               }
             }}
             onClick={() => {
-              setCurrentQuestion(currentQuestion > 0 ? currentQuestion - 1 : currentQuestion)
+              setCurrentQuestion(currentQuestion > 0 ? currentQuestion - 1 : currentQuestion);
+              let competences = formData.competences;
+              // console.log(competences[currentQuestion-1]);
+              scene.set_selected_item(competences[currentQuestion-1]);
+              setSelectedIndex(competences[currentQuestion-1]);
             }}
           >
             Anterior
           </Button>
           <Button
+          disabled={selectedIndex == null}
             sx={{
               padding: '.5rem 2rem',
               borderRadius: '.5rem',
@@ -163,16 +169,29 @@ const Questions = () => {
               }
             }}
             onClick={() => {
-              if (currentQuestion + 1 < ementa[formData.materia].length)
-                setCurrentQuestion(currentQuestion + 1)
+              let competences = formData.competences ? formData.competences : {};
+              competences[currentQuestion] = selectedIndex;
+              setFormData({...formData, competences: competences});
+              if (currentQuestion + 1 < competencias["lista"].length){
+                setCurrentQuestion(currentQuestion + 1);
+                if(!competences[currentQuestion + 1]){
+                  setSelectedIndex(null)
+                  scene.clear_selection()
+                } else {
+                  scene.set_selected_item(competences[currentQuestion+1]);
+                  setSelectedIndex(competences[currentQuestion+1]);
+                }
+              } else {
+                console.log({...formData, competences: competences});
+              }
             }}
           >
-            {currentQuestion + 1 < ementa[formData.materia].length ? 'Próximo' : 'Enviar'}
+            {currentQuestion + 1 < competencias["lista"].length ? 'Próximo' : 'Enviar'}
           </Button>
         </Box>
         {/* Stepper */}
         <Stepper activeStep={currentQuestion} alternativeLabel connector={<QontoConnector />}>
-          {ementa[formData.materia].map((label) => (
+          {competencias["lista"].map((label) => (
             <Step key={label}>
               <StepLabel StepIconComponent={QontoStepIcon}></StepLabel>
             </Step>
