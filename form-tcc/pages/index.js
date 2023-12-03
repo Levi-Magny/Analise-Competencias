@@ -1,18 +1,22 @@
 import Head from 'next/head';
-import styles from '../styles/Home.module.css';
+import { useEffect, useState } from 'react';
 import { ContainerPurple } from '../components';
+import styles from '../styles/Home.module.css';
 import Header from '../components/header';
 import UserInfo from '../components/formHome';
 import Title from '../components/title';
-import { useEffect, useState } from 'react';
+import { FormContext, useFormContext } from '../contexts/formcontext';
 
 export default function Home() {
   const [isSubmitted, setIsSubmitted] = useState(false)
-
+  const {loadApi} = useFormContext()
+  useEffect(()=> {
+    loadApi();
+  }, [])
   return (
     <div className={styles.container}>
       <Head>
-        <title>Analise Competencias</title>
+        <title>Análise de Competências</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
@@ -20,7 +24,7 @@ export default function Home() {
         <ContainerPurple height="50vh" className={isSubmitted ? 'on-submit' : ''}>
           <Header/>
           <Title
-            title="Título da Ferramenta"
+            title="Análise de Competências"
             subtitle="Ajude-nos a guiar estudantes em sua jornada acadêmica e profissional."
           />
           <div className={styles.arrow}>

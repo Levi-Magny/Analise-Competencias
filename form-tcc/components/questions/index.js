@@ -4,6 +4,7 @@ import { useFormContext } from "../../contexts/formcontext"
 import competencias from '../../data/competencias.json'
 import blooms from '../../data/blooms.json'
 import { useEffect, useState } from "react"
+import { useRouter } from 'next/router';
 
 import Check from '@mui/icons-material/Check';
 import StepConnector, { stepConnectorClasses } from '@mui/material/StepConnector';
@@ -73,6 +74,7 @@ function QontoStepIcon(props) {
 
 const Questions = () => {
   const { formData, setFormData } = useFormContext();
+  const rotas = useRouter()
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [currentIndex, setCurrentIndex] = useState([0,0]);
   const [selectedIndex, setSelectedIndex] = useState(null)
@@ -183,6 +185,7 @@ const Questions = () => {
                 }
               } else {
                 console.log({...formData, competences: competences});
+                rotas.push('/obrigado')
               }
             }}
           >

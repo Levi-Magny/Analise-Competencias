@@ -3,6 +3,7 @@
 import { Box, Button, Container, Grid, MenuItem } from "@mui/material"
 import TextField from "@mui/material/TextField"
 import dados from '../../data/materias.json'
+import docentes from '../../data/docentes.json'
 import { useRouter } from 'next/router';
 import { FormContext, useFormContext } from "../../contexts/formcontext";
 import { useContext, useEffect } from "react";
@@ -44,7 +45,7 @@ const UserInfo = ({setSubmitted}) => {
                         event.preventDefault();
                         setSubmitted(true);
                         setTimeout(() => {
-                        rotas.push('/ementa');
+                        rotas.push('/competencias');
                         }, 500);
                     }}
                 >
@@ -55,6 +56,8 @@ const UserInfo = ({setSubmitted}) => {
                                 name="Name"
                                 required
                                 fullWidth
+                                select
+                                defaultValue="1"
                                 id="name"
                                 label="Docente"
                                 autoFocus
@@ -65,7 +68,13 @@ const UserInfo = ({setSubmitted}) => {
                                     setDocente(event.target.value)
                                     setFormData(data)
                                 }}
-                            />
+                            >
+                            {docentes.docentes.map((docente) => (
+                                <MenuItem key={docente.id} value={docente.id}>
+                                    {docente.nome}
+                                </MenuItem>
+                            ))}
+                            </TextField>
                         </Grid>
                         <Grid item xs={12} sm={8}>
                             <TextField
@@ -75,14 +84,14 @@ const UserInfo = ({setSubmitted}) => {
                                 id="component"
                                 label="Componente Curricular"
                                 select
-                                defaultValue="0"
+                                defaultValue="1"
                                 placeholder="Selecione"
                                 autoFocus
                                 value={formData.materia}
                                 onChange={(event) => {
                                     let data = formData;
-                                    data.materia = event.target.value
-                                    setFormData({...data})
+                                    data.materia = event.target.value;
+                                    setFormData({...data});
                                     localStorage.setItem("form", JSON.stringify(data));
                                 }}
                             >

@@ -1,0 +1,19 @@
+{
+    "docentes": [
+        {
+            "id": 1,
+            "materias": [],
+            "nome": "Rodrigo Aparecido da Silva Braga"
+        },
+        {
+            "id": 2,
+            "materias": [],
+            "nome": "Giovani Bernardes Vitor"
+        },
+        {
+            "id": 3,
+            "materias": [],
+            "nome": "Fabiana Costa Guedes"
+        }
+    ]
+}
