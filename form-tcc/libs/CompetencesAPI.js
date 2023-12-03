@@ -1,14 +1,14 @@
 import dotenv from 'dotenv';
-dotenv.config();
+dotenv.config({path:'.env'});
 
 export default class CompetencesApi {
     constructor() {
-        this.user = process.env.API_USER;
-        this.password = process.env.API_PASSWORD;
+        this.user = 'levi-magny';
+        this.password = 'X9latvr5#kt';
     }
 
     async getToken() {
-        let response = await fetch('https://web-production-9a4d.up.railway.app/token', {
+        let response = await fetch('https://web-production-9a4d.up.railway.app/token/', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
