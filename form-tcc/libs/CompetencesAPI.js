@@ -25,8 +25,25 @@ export default class CompetencesApi {
 
     }
 
+    async updateToken(refreshToken){
+        let response = await fetch('https://web-production-9a4d.up.railway.app/token/refresh/', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ 'refresh': refreshToken })
+        });
+
+        let data = await response.json();
+
+        return {
+            responseStatus: response.status,
+            tokens: data
+        }
+    }
+
     async get_competences(acessToken) {
-        let response = await fetch('https://web-production-9a4d.up.railway.app/api/listar-competencias', {
+        let response = await fetch('https://web-production-9a4d.up.railway.app/api/listar-competencias/', {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -35,5 +52,10 @@ export default class CompetencesApi {
         });
 
         let data = await response.json();
+        // console.log("data:", data)
+        return {
+            responseStatus: response.status,
+            competences: data
+        }
     }
 }

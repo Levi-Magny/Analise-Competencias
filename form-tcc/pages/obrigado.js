@@ -10,7 +10,8 @@ import { useFormContext } from '../contexts/formcontext';
 import { Box, Button } from "@mui/material"
 
 const Obrigado = () => {
-    const {docente, setDocente} = useFormContext()
+    const {docente, setDocente} = useFormContext();
+    const rotas = useRouter();
 
     return (
         <ContainerPurple height="95vh">
@@ -47,7 +48,7 @@ const Obrigado = () => {
                 }
                 }}
                 onClick={() => {
-                    rotas.push('/obrigado')
+                    rotas.push('/')
                 }
                 }
                 >

@@ -1,15 +1,16 @@
-import { Box, Step, StepLabel, Stepper, colors, Stack, Button } from "@mui/material"
-import { Description, QuestionText } from ".."
-import { useFormContext } from "../../contexts/formcontext"
-import competencias from '../../data/competencias.json'
-import blooms from '../../data/blooms.json'
-import { useEffect, useState } from "react"
+import { Box, Step, StepLabel, Stepper, colors, Stack, Button } from "@mui/material";
+import { Description, QuestionText } from "..";
+import { useFormContext } from "../../contexts/formcontext";
+import CompetencesApi from '../../libs/CompetencesAPI';
+import competencias from '../../data/competencias.json';
+import blooms from '../../data/blooms.json';
+import { useEffect, useState } from "react";
 import { useRouter } from 'next/router';
 
 import Check from '@mui/icons-material/Check';
 import StepConnector, { stepConnectorClasses } from '@mui/material/StepConnector';
 import { styled } from '@mui/material/styles';
-import SceneInit from "../../libs/SceneInit"
+import SceneInit from "../../libs/SceneInit";
 // import * as THREE from 'three'
 
 const QontoConnector = styled(StepConnector)(({ theme }) => ({
@@ -73,13 +74,23 @@ function QontoStepIcon(props) {
 }
 
 const Questions = () => {
-  const { formData, setFormData } = useFormContext();
+  const { formData, setFormData, authTokens, api } = useFormContext();
   const rotas = useRouter()
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [currentIndex, setCurrentIndex] = useState([0,0]);
   const [selectedIndex, setSelectedIndex] = useState(null)
   const [scene, setScene] = useState(null)
+  const [competences, setCompetences] = useState(null)
   const bloomMatrix = blooms['matrix'];
+
+  useEffect(()=>{
+    // const api = new CompetencesApi()
+    const fetchData = async ()=>{
+      let compt = await api.get_competences(authTokens.access)
+      setCompetences(compt.competences)
+    }
+    fetchData()
+  }, [])
 
   useEffect(() => {
     let dimentions = [window.innerWidth, 360]
@@ -99,7 +110,7 @@ const Questions = () => {
         alignItems: "center"
       }}
     >
-      <QuestionText>{competencias["lista"][currentQuestion]}</QuestionText>
+      <QuestionText>{competences && competences[currentQuestion]['descricao']}</QuestionText>
       <Box
         sx={{
           height: "20rem",
@@ -171,31 +182,31 @@ const Questions = () => {
               }
             }}
             onClick={() => {
-              let competences = formData.competences ? formData.competences : {};
-              competences[currentQuestion] = selectedIndex;
-              setFormData({...formData, competences: competences});
-              if (currentQuestion + 1 < competencias["lista"].length){
+              let compts = formData.compts ? formData.compts : {};
+              compts[currentQuestion] = selectedIndex;
+              setFormData({...formData, compts: compts});
+              if (currentQuestion + 1 < competences.length){
                 setCurrentQuestion(currentQuestion + 1);
-                if(!competences[currentQuestion + 1]){
+                if(!compts[currentQuestion + 1]){
                   setSelectedIndex(null)
                   scene.clear_selection()
                 } else {
-                  scene.set_selected_item(competences[currentQuestion+1]);
-                  setSelectedIndex(competences[currentQuestion+1]);
+                  scene.set_selected_item(compts[currentQuestion+1]);
+                  setSelectedIndex(compts[currentQuestion+1]);
                 }
               } else {
-                console.log({...formData, competences: competences});
+                console.log({...formData, compts: compts});
                 rotas.push('/obrigado')
               }
             }}
           >
-            {currentQuestion + 1 < competencias["lista"].length ? 'Próximo' : 'Enviar'}
+            {competences && currentQuestion + 1 < competences.length ? 'Próximo' : 'Enviar'}
           </Button>
         </Box>
         {/* Stepper */}
         <Stepper activeStep={currentQuestion} alternativeLabel connector={<QontoConnector />}>
-          {competencias["lista"].map((label) => (
-            <Step key={label}>
+          {competences && competences.map((item) => (
+            <Step key={item.id}>
               <StepLabel StepIconComponent={QontoStepIcon}></StepLabel>
             </Step>
           ))}

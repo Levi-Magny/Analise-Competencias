@@ -11,8 +11,9 @@ import { useRouter } from 'next/router';
 
 
 const MainForm = () => {
-    const {formData, setFormData, docente, setDocente} = useFormContext();
+    const {formData, setFormData, docente, setDocente, authTokens, api} = useFormContext();
     const { push } = useRouter()
+
     useEffect(() => {
         const formS = JSON.parse(localStorage.getItem("form"))
         if(formS.docente && formS.materia){
