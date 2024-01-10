@@ -11,7 +11,7 @@ export default function App({ Component, pageProps }) {
                 <meta property="og:title" content="Analise de Competencias" key="title" />
                 <meta property="og:description" content="Ajude-nos a guiar estudantes em sua jornada acadêmica e profissional." />
                 <meta property="og:url" content="https://analise-competencias.vercel.app/" />
-                <link rel="shortcut icon" href="/favicon.png" />
+                <link rel="shortcut icon" href="/Logo.svg" />
             </Head>
             <FormProvider>
                 <Component {...pageProps} />

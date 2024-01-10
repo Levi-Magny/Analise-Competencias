@@ -1,31 +1,39 @@
 'use client';
 
-import { Box, Button, Container, Grid, MenuItem } from "@mui/material"
+import { Box, Button, Container, Grid, MenuItem, capitalize } from "@mui/material"
 import TextField from "@mui/material/TextField"
 import dados from '../../data/materias.json'
 import docentes from '../../data/docentes.json'
 import { useRouter } from 'next/router';
 import { FormContext, useFormContext } from "../../contexts/formcontext";
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useLayoutEffect, useState } from "react";
 
 const UserInfo = ({setSubmitted}) => {
     const rotas = useRouter();
-    const {formData, setFormData, docente, setDocente} = useFormContext()
-
+    const {formData, setFormData, docente, setDocente, authTokens, api} = useFormContext();
+    const [docentesArray, setDocentesArray] = useState(null)
+    const [materiaArray, setMateriaArray] = useState(null)
+    
     useEffect(() => {
         const formS = JSON.parse(localStorage.getItem("form"));
         if(formS){
             setFormData(formS);
-            setDocente(formS.docente)
+            setDocente(formS.docente);
         }
-    }, [])
 
+        const fetchData = async ()=>{
+            let dosc = await api.get_docentes(authTokens.access);
+            setDocentesArray(dosc.docentes);
+        }
+        fetchData();
+    }, [])
+    
     useEffect(() => {
         localStorage.setItem("form", JSON.stringify(formData));
     }, [formData, docente])
 
     return (
-        <Container component="main" maxWidth="md">
+        docentesArray && <Container component="main" maxWidth="md">
             <Box 
                 sx={{
                     marginTop:8,
@@ -57,34 +65,35 @@ const UserInfo = ({setSubmitted}) => {
                                 required
                                 fullWidth
                                 select
-                                defaultValue="1"
+                                defaultValue="-1"
                                 id="name"
                                 label="Docente"
                                 autoFocus
-                                value={docente}
                                 onChange={(event) => {
                                     let data = formData;
-                                    data.docente = event.target.value
-                                    setDocente(event.target.value)
-                                    setFormData(data)
+                                    data.docente = docentesArray[event.target.value-1];
+                                    data.materia = docentesArray[Number(event.target.value-1)].materias[0].id;
+                                    setDocente(event.target.value);
+                                    setFormData(data);
+                                    setMateriaArray(docentesArray[Number(event.target.value-1)].materias);
                                 }}
                             >
-                            {docentes.docentes.map((docente) => (
+                            {docentesArray.map((docente) => (
                                 <MenuItem key={docente.id} value={docente.id}>
-                                    {docente.nome}
+                                    {docente.nome.toUpperCase()}
                                 </MenuItem>
                             ))}
                             </TextField>
                         </Grid>
                         <Grid item xs={12} sm={8}>
-                            <TextField
+                            {materiaArray && <TextField
                                 name="componente"
                                 required
                                 fullWidth
                                 id="component"
                                 label="Componente Curricular"
                                 select
-                                defaultValue="1"
+                                defaultValue="0"
                                 placeholder="Selecione"
                                 autoFocus
                                 value={formData.materia}
@@ -95,12 +104,12 @@ const UserInfo = ({setSubmitted}) => {
                                     localStorage.setItem("form", JSON.stringify(data));
                                 }}
                             >
-                                {dados.materias.map((materia) => (
+                                {materiaArray.map((materia) => (
                                     <MenuItem key={materia.id} value={materia.id}>
-                                        {materia.Nome}
+                                        {materia.nome.toUpperCase()}
                                     </MenuItem>
                                 ))}
-                            </TextField>
+                            </TextField>}
                         </Grid>
                         <Grid item xs={12} sm={8}>
                             <Button

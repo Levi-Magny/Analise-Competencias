@@ -8,9 +8,10 @@ import { useRouter } from 'next/router';
 import { useFormContext } from '../contexts/formcontext';
 
 import { Box, Button } from "@mui/material"
+import { useEffect } from 'react';
 
 const Obrigado = () => {
-    const {docente, setDocente} = useFormContext();
+    const {docente, setDocente, setFormData, formData} = useFormContext();
     const rotas = useRouter();
 
     return (
@@ -20,7 +21,7 @@ const Obrigado = () => {
             </Head>
             <Header/>
             <Title
-            title={docente && `Obrigado, Prof. ${docentes.docentes[parseInt(docente-1)].nome.split(' ')[0]}!`}
+            title={docente && `Obrigado, Prof. ${formData.docente.nome.split(' ')[0]}!`}
             subtitle="Sua contribuição será de grande valia."
             />
             <Box
@@ -48,6 +49,9 @@ const Obrigado = () => {
                 }
                 }}
                 onClick={() => {
+                    setDocente(null);
+                    setFormData({});
+                    localStorage.removeItem("form");
                     rotas.push('/')
                 }
                 }

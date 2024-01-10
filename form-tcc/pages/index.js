@@ -9,7 +9,7 @@ import { FormContext, useFormContext } from '../contexts/formcontext';
 
 export default function Home() {
   const [isSubmitted, setIsSubmitted] = useState(false)
-  const {loadApi} = useFormContext()
+  const {loadApi, authTokens} = useFormContext()
   useEffect(()=> {
     loadApi();
   }, [])
@@ -17,7 +17,7 @@ export default function Home() {
     <div className={styles.container}>
       <Head>
         <title>Análise de Competências</title>
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="/Logo-Verde.svg" />
       </Head>
 
       <main>
@@ -31,7 +31,7 @@ export default function Home() {
             <img src="/arrow.svg" className={isSubmitted ? styles.rotate : ''}/>
           </div>
         </ContainerPurple>
-        <UserInfo setSubmitted={setIsSubmitted}/>
+        {authTokens && <UserInfo setSubmitted={setIsSubmitted}/>}
       </main>
 
       <footer>

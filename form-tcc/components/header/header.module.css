@@ -11,6 +11,11 @@
 .logo {
     font-size: 1.5rem;
     font-weight: bold;
+    width: 10rem;
+}
+
+.logo img {
+    fill: #FCFAFA;
 }
 
 /* Estilizando a barra de navegação */

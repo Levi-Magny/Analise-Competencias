@@ -74,7 +74,7 @@ function QontoStepIcon(props) {
 }
 
 const Questions = () => {
-  const { formData, setFormData, authTokens, api } = useFormContext();
+  const { formData, setFormData, authTokens, setAuthTokens, api } = useFormContext();
   const rotas = useRouter()
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [currentIndex, setCurrentIndex] = useState([0,0]);
@@ -84,12 +84,14 @@ const Questions = () => {
   const bloomMatrix = blooms['matrix'];
 
   useEffect(()=>{
-    // const api = new CompetencesApi()
+    let accessTk = authTokens ? authTokens.access : JSON.parse(localStorage.getItem("authTokens")).access;
+    // se o usuario recarregar a página
+
     const fetchData = async ()=>{
-      let compt = await api.get_competences(authTokens.access)
-      setCompetences(compt.competences)
+      let compt = await api.get_competences(accessTk);
+      setCompetences(compt.competences);
     }
-    fetchData()
+    fetchData();
   }, [])
 
   useEffect(() => {
@@ -110,7 +112,7 @@ const Questions = () => {
         alignItems: "center"
       }}
     >
-      <QuestionText>{competences && competences[currentQuestion]['descricao']}</QuestionText>
+      <QuestionText>{competences && competences[currentQuestion].descricao}</QuestionText>
       <Box
         sx={{
           height: "20rem",
@@ -160,10 +162,9 @@ const Questions = () => {
             }}
             onClick={() => {
               setCurrentQuestion(currentQuestion > 0 ? currentQuestion - 1 : currentQuestion);
-              let competences = formData.competences;
-              // console.log(competences[currentQuestion-1]);
-              scene.set_selected_item(competences[currentQuestion-1]);
-              setSelectedIndex(competences[currentQuestion-1]);
+              let compts = formData.compts;
+              scene.set_selected_item(compts[currentQuestion-1]);
+              setSelectedIndex(compts[currentQuestion-1]);
             }}
           >
             Anterior
@@ -181,7 +182,7 @@ const Questions = () => {
                 color: "#7A5DAB"
               }
             }}
-            onClick={() => {
+            onClick={async () => {
               let compts = formData.compts ? formData.compts : {};
               compts[currentQuestion] = selectedIndex;
               setFormData({...formData, compts: compts});
@@ -195,7 +196,7 @@ const Questions = () => {
                   setSelectedIndex(compts[currentQuestion+1]);
                 }
               } else {
-                console.log({...formData, compts: compts});
+                await api.insert_blooms(authTokens.access, {...formData, compts: compts});
                 rotas.push('/obrigado')
               }
             }}

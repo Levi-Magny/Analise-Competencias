@@ -56,6 +56,7 @@ export const FormProvider = ({children}) => {
         setFormData,
         docente,
         setDocente,
+        setAuthTokens,
         authTokens,
         api
     }

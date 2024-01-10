@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useLayoutEffect, useState } from 'react';
 import { ContainerPurple } from "../components";
 import { useFormContext } from '../contexts/formcontext';
 import Head from 'next/head';
@@ -12,26 +12,28 @@ import { useRouter } from 'next/router';
 
 const MainForm = () => {
     const {formData, setFormData, docente, setDocente, authTokens, api} = useFormContext();
-    const { push } = useRouter()
+    const [showQuestions, setShowQuestions] = useState(false)
+    const { push } = useRouter();
 
     useEffect(() => {
         const formS = JSON.parse(localStorage.getItem("form"))
         if(formS.docente && formS.materia){
-            setFormData(formS)
-            setDocente(formS.docente)
+            setShowQuestions(true);
+            setFormData(formS);
+            setDocente(formS.docente);
         } else {
             push('/')
         }
     }, [])
 
     return(
-        <ContainerPurple height="95vh">
+        showQuestions && <ContainerPurple height="95vh">
             <Head>
                 <title>Competências</title>
             </Head>
             <Header/>
             <Title
-            title={docente && `Olá, Prof. ${docentes.docentes[parseInt(docente-1)].nome.split(' ')[0]}`}
+            title={docente && `Olá, Prof. ${formData.docente.nome.split(' ')[0]}`}
             subtitle="Ajude-nos a guiar estudantes em sua jornada acadêmica e profissional."
             />
             <Questions/>
