@@ -6,7 +6,6 @@ export default class CompetencesApi {
     }
 
     async getToken() {
-        console.log(this.password);
         let response = await fetch('https://web-production-9a4d.up.railway.app/token/', {
             method: 'POST',
             headers: {
@@ -79,15 +78,17 @@ export default class CompetencesApi {
         let listaConvertida = [];
 
         for (const [competencia, indices] of Object.entries(obj.compts)) {
-            const [iIndex, jIndex] = indices;
-
-            listaConvertida.push({
-                docente: obj.docente.id,
-                competencia: parseInt(competencia, 10)+1,
-                materia: obj.materia,
-                i_index: iIndex,
-                j_index: jIndex
-            });
+            if (indices) {
+                const [iIndex, jIndex] = indices;
+                
+                listaConvertida.push({
+                    docente: obj.docente.id,
+                    competencia: parseInt(competencia, 10)+1,
+                    materia: obj.materia,
+                    i_index: iIndex,
+                    j_index: jIndex
+                });
+            }
         }
 
         return JSON.stringify(listaConvertida);
@@ -105,6 +106,6 @@ export default class CompetencesApi {
             body: req_body
         });
         let data = await response.json();
-        console.log(data)
+        console.log(data);
     }
 }

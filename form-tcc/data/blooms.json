@@ -3,110 +3,138 @@
         [
             {
                 "title": "Listar",
-                "description": "Fazer uma síntese do conteúdo apresentado"
+                "description": "Fazer uma síntese do conteúdo apresentado",
+                "color": "#8CD6FF"
             },
             {
                 "title": "Reconhecer",
-                "description": ""
+                "description": "",
+                "color": "#8CD6FF"
             },
             {
                 "title": "Lembrar",
-                "description": ""
+                "description": "",
+                "color": "#8CD6FF"
             },
             {
                 "title": "Identificar",
-                "description": ""
+                "description": "",
+                "color": "#8CD6FF"
             }
         ],
         [
             {
                 "title": "Resumir",
-                "description": ""
+                "description": "",
+                "color": "#95FF8C"
             },
             {
                 "title": "Classificar",
-                "description": ""
+                "description": "",
+                "color": "#95FF8C"
             },
             {
                 "title": "Esclarecer",
-                "description": ""
+                "description": "",
+                "color": "#95FF8C"
             },
             {
                 "title": "Predizer",
-                "description": ""
+                "description": "",
+                "color": "#95FF8C"
             }
         ],
         [
             {
                 "title": "Responder",
-                "description": ""
+                "description": "",
+                "color": "#CCFF8C"
             },
             {
                 "title": "Fornecer",
-                "description": ""
+                "description": "",
+                "color": "#CCFF8C"
             },
             {
                 "title": "Realizar",
-                "description": ""
+                "description": "",
+                "color": "#CCFF8C"
             },
             {
                 "title": "Usar",
-                "description": ""
+                "description": "",
+                "color": "#CCFF8C"
             }
         ],
         [
             {
                 "title": "Selecionar",
-                "description": ""
+                "description": "",
+                "color": "#FDFF8C"
             },
             {
                 "title": "Diferenciar",
-                "description": ""
+                "description": "",
+                "color": "#FDFF8C"
             },
             {
                 "title": "Integrar",
-                "description": ""
+                "description": "",
+                "color": "#FDFF8C"
             },
             {
                 "title": "Desconstruir",
-                "description": ""
+                "description": "",
+                "color": "#FDFF8C"
             }
         ],
         [
             {
                 "title": "Verificar",
-                "description": ""
+                "description": "",
+                "color": "#FFCA8C"
             },
             {
                 "title": "Determinar",
-                "description": ""
+                "description": "",
+                "color": "#FFCA8C"
             },
             {
                 "title": "Julgar",
-                "description": ""
+                "description": "",
+                "color": "#FFCA8C"
             },
             {
                 "title": "Refletir",
-                "description": ""
+                "description": "",
+                "color": "#FFCA8C"
             }
         ],
         [
             {
                 "title": "Gerar",
-                "description": ""
+                "description": "",
+                "color": "#FF938C"
             },
             {
                 "title": "Reunir",
-                "description": ""
+                "description": "",
+                "color": "#FF938C"
             },
             {
                 "title": "Projetar",
-                "description": ""
+                "description": "",
+                "color": "#FF938C"
             },
             {
                 "title": "Criar",
-                "description": ""
+                "description": "",
+                "color": "#FF938C"
             }
         ]
+    ],
+    "dimensoes": [
+        ["Lembrar", "Entender", "Aplicar", "Analisar", "Avaliar", "Criar"],
+        ["Factual", "Conceitual", "Procedural", "Metacognitivo"]
     ]
 }

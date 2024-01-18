@@ -41,10 +41,11 @@ export const FormProvider = ({children}) => {
                 throw new Error(`Erro de rede! Código: ${response.status}`);
             }
         }
-        let fourMinutes = 4 * 60 * 1000;
+        let fourMinutes = 1 * 60 * 1000;
         let interval = setInterval(()=>{
+            console.log("update_token");
             if(authTokens){
-                update_token()
+                update_token();
             }
         }, fourMinutes)
         return ()=> clearInterval(interval);

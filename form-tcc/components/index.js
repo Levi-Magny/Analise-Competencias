@@ -7,6 +7,8 @@ function Layout({children}) {
 
 const QuestionText = styled.h4`
   font-family: 'Roboto', helvetica, sans-serif;
+  font-size: 15pt;
+  font-weight: 550;
   color: ${(props) => props.color || '#FFF'};
   margin: 0;
   padding: .5rem;
