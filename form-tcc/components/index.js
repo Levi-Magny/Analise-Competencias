@@ -14,6 +14,16 @@ const QuestionText = styled.h4`
   padding: .5rem;
 `
 
+const BoxItemMobile = styled.div`
+  height: inherit;
+  max-width: 90vh;
+  display: ${(props) => props.visible ? 'none' : 'flex'} ;
+  flex-direction: ${(props) => props.direction};
+  justify-content: center;
+  align-items: center;
+  gap: .2rem;
+`
+
 const Description = styled.div`
   position: absolute;
   z-index: 100;
@@ -69,7 +79,10 @@ const ContainerPurple = styled.div`
       height: 100vh;
     }
   }
+  @media (max-height: 750px) {
+    height: fit-content;
+  }
 `;
 
 
-export { Layout, ContainerPurple, QuestionText, Description }
+export { Layout, ContainerPurple, BoxItemMobile, QuestionText, Description }

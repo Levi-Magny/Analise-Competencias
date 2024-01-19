@@ -1,18 +1,17 @@
-import { Box, Step, StepLabel, Stepper, colors, Stack, Button, useMediaQuery, Checkbox, FormControlLabel } from "@mui/material";
-import { Description, QuestionText } from "..";
+import { Box, Step, StepLabel, Stepper, colors, Button, useMediaQuery, Checkbox, FormControlLabel } from "@mui/material";
+import { styled } from '@mui/material/styles';
+import MatrixItem from "../matrixItem";
+import { pink } from "@mui/material/colors";
+import Check from '@mui/icons-material/Check';
+import StepConnector, { stepConnectorClasses } from '@mui/material/StepConnector';
+
+import { Description, QuestionText, BoxItemMobile } from "..";
 import { useFormContext } from "../../contexts/formcontext";
-import CompetencesApi from '../../libs/CompetencesAPI';
-import competencias from '../../data/competencias.json';
 import blooms from '../../data/blooms.json';
 import { useEffect, useState } from "react";
 import { useRouter } from 'next/router';
-
-import Check from '@mui/icons-material/Check';
-import StepConnector, { stepConnectorClasses } from '@mui/material/StepConnector';
-import { styled } from '@mui/material/styles';
-import SceneInit from "../../libs/SceneInit";
-import MatrixItem from "../matrixItem";
-import { pink } from "@mui/material/colors";
+import MobileItemMatrix from "../mobileMatrixItem";
+// import SceneInit from "../../libs/SceneInit";
 // import * as THREE from 'three'
 
 const QontoConnector = styled(StepConnector)(({ theme }) => ({
@@ -93,33 +92,33 @@ const Questions = () => {
   const { formData, setFormData, authTokens, setAuthTokens, api } = useFormContext();
   const rotas = useRouter()
   const [currentQuestion, setCurrentQuestion] = useState(0);
-  const [currentIndex, setCurrentIndex] = useState([0,0]);
+  const [currentIndex, setCurrentIndex] = useState([0, 0]);
   const [selectedIndex, setSelectedIndex] = useState(null);
   const [competences, setCompetences] = useState(null);
   const [naoAplica, setNaoAplica] = useState(false)
   const bloomMatrix = blooms['matrix'];
+  const matches = useMediaQuery('(max-width:750px)');
   // const [scene, setScene] = useState(null);
 
-  useEffect(()=>{
+  useEffect(() => {
     let accessTk = authTokens ? authTokens.access : JSON.parse(localStorage.getItem("authTokens")).access;
     // se o usuario recarregar a página
 
-    const fetchData = async ()=>{
+    const fetchData = async () => {
       let compt = await api.get_competences(accessTk);
       setCompetences(compt.competences);
     }
     fetchData();
   }, [])
-
-  useEffect(() => {
-    // let dimentions = [window.innerWidth, 360]
-    // const Scene3d = new SceneInit('myThreeJsCanvas', 'canvasContainer', dimentions, setCurrentIndex, setSelectedIndex);
-    // Scene3d.initialize();
-    // Scene3d.animate();
-    // Scene3d.createMesh();
-    // setScene(Scene3d);
-    // document.body.appendChild(stats.dom);
-  }, []);
+  // useEffect(() => {
+  // let dimentions = [window.innerWidth, 360]
+  // const Scene3d = new SceneInit('myThreeJsCanvas', 'canvasContainer', dimentions, setCurrentIndex, setSelectedIndex);
+  // Scene3d.initialize();
+  // Scene3d.animate();
+  // Scene3d.createMesh();
+  // setScene(Scene3d);
+  // document.body.appendChild(stats.dom);
+  // }, []);
 
   return (
     <Box
@@ -131,111 +130,138 @@ const Questions = () => {
     >
       <QuestionText>{competences && competences[currentQuestion].descricao}</QuestionText>
       <FormControlLabel control={
-        <Checkbox 
+        <Checkbox
           sx={{
-              color: pink[200],
-              padding: '5px',
-              '&.Mui-checked': {color: pink[100]},
-              '& .MuiSvgIcon-root': { fontSize: 20 }
-            }}
+            color: pink[200],
+            padding: '5px',
+            '&.Mui-checked': { color: pink[100] },
+            '& .MuiSvgIcon-root': { fontSize: 20 }
+          }}
           onChange={() => {
             setNaoAplica(!naoAplica);
-            if(selectedIndex) {
+            if (selectedIndex) {
               clearSelection(selectedIndex);
               setSelectedIndex(null);
             }
             let compts = formData.compts ? formData.compts : {};
             compts[currentQuestion] = "";
-            setFormData({...formData, compts: compts});
+            setFormData({ ...formData, compts: compts });
           }}
         />
-        }
+      }
         label="Não se aplica"
-        sx={{color: "#f2f2f2", marginTop: "-.6rem", marginBottom: "1rem", "& .MuiTypography-root": {fontSize: 16} }}
+        sx={{ color: "#f2f2f2", marginTop: "-.6rem", marginBottom: "1rem", "& .MuiTypography-root": { fontSize: 16 } }}
       />
       <Box
         sx={{
           height: "auto",
           width: "100%",
-          display:'flex',
+          display: 'flex',
           flexDirection: 'column',
           justifyContent: 'center',
-          alignItems:'center',
+          alignItems: 'center',
           visibility: naoAplica ? 'hidden' : 'visible'
         }}
       >
-      <>
-      {/* Header Horizontal */}
-        <Box
-          sx={{
-            height: "1.5rem",
-            width: "100%",
-            display:'flex',
-            flexDirection: 'row',
-            justifyContent: 'center',
-            alignItems:'center',
-            gap: ".4rem"
-          }}
-        >
-          {blooms.dimensoes[0].map((item, index) => (
-              <MatrixItem key={index} bgcolor={'none'} HHeader={true} VHeader={false}>{item}</MatrixItem>
-          ))}
-        </Box>
-      {/* Fim Header Horizontal */}
-        <Box
-          sx={{
-            height: "inherit",
-            width: "inherit",
-            display:'flex',
-            flexDirection: 'row',
-            justifyContent: 'center',
-            alignItems:'center',
-            flexWrap: 'wrap',
-            gap: ".4rem"
-          }}
-        >
-          {/* Aqui vai o diagrama da Taxonomia de Bloom */}
+        <>
+          {/* Header Horizontal */}
           <Box
             sx={{
-              display:'flex',
-              position: "relative",
-              flexDirection: 'column',
+              height: "1.5rem",
+              width: "100%",
+              padding: matches ? '0 5vw' : '',
+              display: 'flex',
+              flexDirection: 'row',
               justifyContent: 'center',
-              alignItems:'center',
+              alignItems: 'center',
               gap: ".4rem"
             }}
-            >
-            {blooms.dimensoes[1].map((item, index) => (
-                  <MatrixItem key={index} bgcolor={'none'} VHeader={true} HHeader={false}>{item}</MatrixItem>
+          >
+            {blooms.dimensoes[0].map((item, index) => (
+              <MatrixItem key={index} bgcolor={'none'} HHeader={true} VHeader={false}>{item}</MatrixItem>
             ))}
           </Box>
-          {bloomMatrix.map((linha, indexRow) => (
-            <Box
-            key={indexRow}
+          {/* Fim Header Horizontal */}
+          {/* Mobile */}
+          {matches && <BoxItemMobile direction={'row'}>
+            {bloomMatrix.map((linha, indexRow) => (
+              <BoxItemMobile
+                key={indexRow}
+                direction={'column'}
+              >
+                {linha.map((item, indexCol) => (
+                  <MobileItemMatrix
+                    key={indexCol}
+                    id={`[${indexCol}-${indexRow}]`}
+                    bgcolor={item.color}
+                    description={item.description}
+                    index={[indexCol, indexRow]}
+                    selectedIdx={selectedIndex}
+                    onItemClick={setSelectedIndex}
+                  >
+                    {item.title}
+                  </MobileItemMatrix>
+                ))}
+              </BoxItemMobile>
+            ))}
+          </BoxItemMobile>}
+          {/* Desktop */}
+          {!matches && <Box
             sx={{
-              display:'flex',
-              flexDirection: 'column',
+              height: "inherit",
+              width: "inherit",
+              display: matches ? 'none' : 'flex',
+              flexDirection: 'row',
               justifyContent: 'center',
-              alignItems:'center',
+              alignItems: 'center',
+              flexWrap: 'wrap',
               gap: ".4rem"
             }}
+          >
+            {/* Header Vertical */}
+            <Box
+              sx={{
+                display: 'flex',
+                position: "relative",
+                flexDirection: 'column',
+                justifyContent: 'center',
+                alignItems: 'center',
+                gap: ".4rem"
+              }}
             >
-              {linha.map((item, indexCol) => (
-                <MatrixItem
-                  key={indexCol}
-                  id={`[${indexCol}-${indexRow}]`}
-                  bgcolor={item.color}
-                  description={item.description}
-                  index={[indexCol, indexRow]}
-                  selectedIdx = {selectedIndex}
-                  onItemClick={setSelectedIndex}
-                >
-                  {item.title}
-                </MatrixItem>
+              {blooms.dimensoes[1].map((item, index) => (
+                <MatrixItem key={index} bgcolor={'none'} VHeader={true} HHeader={false}>{item}</MatrixItem>
               ))}
             </Box>
-          ))}
-        </Box>
+            {/* Fim Header Vertical */}
+            {/* Aqui vai o diagrama da Taxonomia de Bloom */}
+            {bloomMatrix.map((linha, indexRow) => (
+              <Box
+                key={indexRow}
+                sx={{
+                  display: 'flex',
+                  flexDirection: 'column',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  gap: ".4rem"
+                }}
+              >
+                {linha.map((item, indexCol) => (
+                  <MatrixItem
+                    key={indexCol}
+                    id={`[${indexCol}-${indexRow}]`}
+                    bgcolor={item.color}
+                    description={item.description}
+                    index={[indexCol, indexRow]}
+                    selectedIdx={selectedIndex}
+                    onItemClick={setSelectedIndex}
+                  >
+                    {item.title}
+                  </MatrixItem>
+                ))}
+              </Box>
+            ))}
+          </Box>}
         </>
       </Box>
       {/* Container com os botões e 'steps' */}
@@ -271,14 +297,14 @@ const Questions = () => {
               let compts = formData.compts;
               // clearSelection(compts[currentQuestion]);
               clearSelection(compts[currentQuestion])
-              setSelection(compts[currentQuestion-1]);
-              setSelectedIndex(compts[currentQuestion-1]);
+              setSelection(compts[currentQuestion - 1]);
+              setSelectedIndex(compts[currentQuestion - 1]);
             }}
           >
             Anterior
           </Button>
           <Button
-          disabled={selectedIndex == null && naoAplica == false}
+            disabled={selectedIndex == null && naoAplica == false}
             sx={{
               padding: '.5rem 2rem',
               borderRadius: '.5rem',
@@ -293,19 +319,19 @@ const Questions = () => {
             onClick={async () => {
               let compts = formData.compts ? formData.compts : {};
               compts[currentQuestion] = selectedIndex;
-              setFormData({...formData, compts: compts});
-              if (currentQuestion + 1 < competences.length){
+              setFormData({ ...formData, compts: compts });
+              if (currentQuestion + 1 < competences.length) {
                 setCurrentQuestion(currentQuestion + 1);
-                if(!compts[currentQuestion + 1]){
+                if (!compts[currentQuestion + 1]) {
                   clearSelection(selectedIndex);
                   setSelectedIndex(null);
                 } else {
                   clearSelection(compts[currentQuestion]);
-                  setSelection(compts[currentQuestion+1]);
-                  setSelectedIndex(compts[currentQuestion+1]);
+                  setSelection(compts[currentQuestion + 1]);
+                  setSelectedIndex(compts[currentQuestion + 1]);
                 }
               } else {
-                await api.insert_blooms(authTokens.access, {...formData, compts: compts});
+                await api.insert_blooms(authTokens.access, { ...formData, compts: compts });
                 rotas.push('/obrigado')
               }
             }}
