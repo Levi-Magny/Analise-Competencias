@@ -2,6 +2,8 @@
 
 Este é um projeto Next.js que implementa um formulário para avaliação da Taxonomia de Bloom, permitindo que docentes classifiquem o nível de Bloom abordado em cada competência para uma determinada matéria.
 
+<p align="center"><img src="https://github.com/Levi-Magny/Analise-Competencias/blob/master/An%C3%A1lise%20de%20Compet%C3%AAncias.gif"/></p>
+
 ## Tecnologias Utilizadas
 
 - Next.js (latest)
