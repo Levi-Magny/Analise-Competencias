@@ -1,3 +1,14 @@
+@font-face {
+    font-family: 'Julius Sans One';
+    src: url('/fonts/JuliusSansOne-Regular.ttf') format('truetype');
+}
+
+.modalTitle {
+    color: snow;
+    font-family: 'Julius Sans One', sans-serif;
+    font-size: 16pt;
+}
+
 .itemBox {
     height: 100%;
     width: 100%;
@@ -8,7 +19,7 @@
     justify-content: center;
     overflow: hidden;
 
-    border-radius: .4rem;
+    border-radius: .1rem;
     cursor: pointer;
     transition: .5s;
     color: #423671;
@@ -16,4 +27,32 @@
 
 .itemBox h4 {
     font-size: 2vw;
-}   
+}
+
+.modalContainer {
+    position: fixed;
+    left:0;
+    top: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(60, 60, 60, 0.4);
+    z-index: 50;
+}
+
+.close {
+    position: absolute;
+    top: 1rem;
+    width: 100%;
+    padding: 0 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: right;
+}
+
+.close img{
+    width: 1.5rem;
+    filter: invert(73%) sepia(42%) saturate(534%) hue-rotate(203deg) brightness(85%) contrast(96%);
+}

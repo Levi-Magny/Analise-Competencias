@@ -53,6 +53,29 @@ const Description = styled.div`
 
   `;
 
+const ModalBox = styled.div`
+  z-index: 100;
+  position: absolute;
+  margin: auto;
+  border: none;
+  border-radius: 1.5rem;
+  width: 90vw;
+  height: 60vh;
+  background: linear-gradient(90deg, #7A5DAB 0%, #423671 100%);
+
+  padding: 1.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  max-height: 15rem; 
+
+  p {
+    font-family: 'Roboto', Helvetica, sans-serif;
+    color: snow;
+  }
+`;
+
 const ContainerPurple = styled.div`
   width: 100%;
   height: ${(props) => props.height || '50vh'}; /* Altura personalizável */
@@ -79,10 +102,10 @@ const ContainerPurple = styled.div`
       height: 100vh;
     }
   }
-  @media (max-height: 750px) {
+  @media (max-height: 600px) {
     height: fit-content;
   }
 `;
 
 
-export { Layout, ContainerPurple, BoxItemMobile, QuestionText, Description }
+export { Layout, ContainerPurple, BoxItemMobile, QuestionText, Description, ModalBox }
