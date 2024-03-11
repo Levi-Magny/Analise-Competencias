@@ -6,12 +6,11 @@ import styles from '../styles/Home.module.css';
 import Header from "../components/header";
 import Title from "../components/title";
 import Questions from '../components/questions';
-import docentes from '../data/docentes.json'
 import { useRouter } from 'next/router';
 
 
 const MainForm = () => {
-    const {formData, setFormData, docente, setDocente, authTokens, api} = useFormContext();
+    const { formData, setFormData, docente, setDocente } = useFormContext();
     const [showQuestions, setShowQuestions] = useState(false)
     const { push } = useRouter();
 
@@ -22,7 +21,7 @@ const MainForm = () => {
             setFormData(formS);
             setDocente(formS.docente);
         } else {
-            push('/')
+            push('/');
         }
     }, [])
 

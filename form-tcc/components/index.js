@@ -76,6 +76,17 @@ const ModalBox = styled.div`
   }
 `;
 
+const HorizontalBox = styled.div`
+
+  display: flex;
+  flex-direction: row;
+
+  justifyContent: center;
+  align-items: flex-start;
+  gap: .4rem;
+
+`;
+
 const ContainerPurple = styled.div`
   width: 100%;
   height: ${(props) => props.height || '50vh'}; /* Altura personalizável */
@@ -94,7 +105,7 @@ const ContainerPurple = styled.div`
   }
 
   /* Estilos para telas menores (exemplo: até 768px de largura) */
-  @media (max-width: 768px) {
+  @media (max-width: 900px) {
     height: 100%;
     padding: 0 .5rem .5rem .5rem;
 
@@ -108,4 +119,4 @@ const ContainerPurple = styled.div`
 `;
 
 
-export { Layout, ContainerPurple, BoxItemMobile, QuestionText, Description, ModalBox }
+export { Layout, ContainerPurple, BoxItemMobile, QuestionText, Description, ModalBox, HorizontalBox }
