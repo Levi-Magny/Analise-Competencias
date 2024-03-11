@@ -10,8 +10,14 @@ const QuestionText = styled.h4`
   font-size: 15pt;
   font-weight: 550;
   color: ${(props) => props.color || '#FFF'};
-  margin: 0;
-  padding: .5rem;
+  margin: .5rem 0 0 0;
+  padding: .5rem .8rem;
+
+  @media (max-width: 760px) {
+    font-size: .8rem;
+    background-color: #4446;
+    border-radius: 1rem;
+  }
 `
 
 const BoxItemMobile = styled.div`

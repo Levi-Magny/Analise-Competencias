@@ -44,15 +44,13 @@ const QontoStepIconRoot = styled('div')(
     display: 'flex',
     height: 22,
     alignItems: 'center',
-    marginLeft: '5px',
-    marginLeft: '-5px',
     ...(ownerState.active && {
       color: '#52FDDE',
     }),
     '& .QontoStepIcon-completedIcon': {
       color: '#52FDDE',
       zIndex: 1,
-      fontSize: 18,
+      fontSize: 10,
     },
     '& .QontoStepIcon-circle': {
       width: 5,
@@ -390,11 +388,12 @@ const Questions = () => {
           <Button
             disabled={currentQuestion == 0}
             sx={{
-              padding: '.5rem 2rem',
+              padding: '.5rem 1.5rem',
               borderRadius: '.5rem',
               minWidth: '8rem',
               color: "#FFF",
               backgroundColor: "#7A5DAB",
+              fontSize: '.7rem',
               ":hover": {
                 backgroundColor: "#52FDDE",
                 color: "#7A5DAB"
@@ -402,11 +401,15 @@ const Questions = () => {
             }}
             onClick={() => {
               setCurrentQuestion(currentQuestion > 0 ? currentQuestion - 1 : currentQuestion);
-              let compts = formData.compts;
+              let compts = formData.compts ? formData.compts : {};
               // clearSelection(compts[currentQuestion]);
-              clearSelection(compts[currentQuestion])
-              setSelection(compts[currentQuestion - 1]);
-              setSelectedIndex(compts[currentQuestion - 1]);
+              if(compts.hasOwnProperty(currentQuestion)) {
+                clearSelection(compts[currentQuestion]);
+              }
+              if (compts.hasOwnProperty(currentQuestion - 1)) {
+                setSelection(compts[currentQuestion - 1]);
+                setSelectedIndex(compts[currentQuestion - 1]);
+              }
             }}
           >
             Anterior
@@ -414,11 +417,12 @@ const Questions = () => {
           <Button
             disabled={selectedIndex == null && naoAplica == false}
             sx={{
-              padding: '.5rem 2rem',
+              padding: '.5rem 1.5rem',
               borderRadius: '.5rem',
               minWidth: '8rem',
               color: "#FFF",
               backgroundColor: "#7A5DAB",
+              fontSize: '.7rem',
               ":hover": {
                 backgroundColor: "#52FDDE",
                 color: "#7A5DAB"
@@ -440,6 +444,7 @@ const Questions = () => {
                 }
               } else {
                 await api.insert_blooms(authTokens.access, { ...formData, compts: compts });
+                console.log({ ...formData, compts: compts })
                 rotas.push('/obrigado')
               }
             }}
@@ -451,7 +456,11 @@ const Questions = () => {
         
         
         {/* Stepper */}
-        {matches && <Stepper activeStep={currentQuestion} alternativeLabel connector={<QontoConnector />}>
+        {matches && <Stepper activeStep={currentQuestion} alternativeLabel connector={<QontoConnector />}
+        sx={{
+          flexWrap: 'wrap',
+          justifyContent: 'left',
+        }}>
           {competences && competences.map((item) => (
             <Step key={[item.id]}>
               <StepLabel StepIconComponent={QontoStepIcon}></StepLabel>
