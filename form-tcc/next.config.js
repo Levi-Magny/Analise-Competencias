@@ -4,4 +4,7 @@ module.exports = withFonts({
   webpack(config, options) {
     return config;
   },
+  compiler: {
+    styledComponents: true,
+  },
 });

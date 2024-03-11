@@ -39,3 +39,80 @@
     color: #FFF;
     font-weight: 400;
 }
+
+.hamburgerMenu, .sideBar {
+    display: none;
+}
+
+@media (max-width: 768px) {
+    .mainNav {
+        display: none;
+    }
+
+    .hamburgerMenu {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+        width: max-content;
+        position: absolute;
+        top: .8rem;
+        right: .5rem;
+        z-index: 5;
+        cursor: pointer;
+    }
+
+    .hamburgerMenu::before,
+    .hamburgerMenu::after,
+    .hamburgerMenu input {
+        content: "";
+        width: 2.5rem;
+        height: 5px;
+        border-radius: .5rem;
+        background-color: #F4F4F4;
+        transform-origin: left center;
+        transition: 200ms ease-in-out;
+    }
+
+    .hamburgerMenu:has(input:checked)::before {
+        width: calc(calc(3 * 5px + 2 * 6px) * 1.414215686);
+        rotate: 45deg;
+        translate: 0 calc(5px / -2);
+        background-color: #7A5DAB;
+    }
+    .hamburgerMenu:has(input:checked)::after {
+        width: calc(calc(3 * 5px + 2 * 6px) * 1.414215686);
+        rotate: -45deg;
+        translate: 0 calc(5px / 2);
+        background-color: #7A5DAB;
+    }
+
+    .hamburgerMenu input {
+        appearance: none;
+        padding: 0;
+        margin: 0;
+        outline: 0;
+        pointer-events: none;
+    }
+    .hamburgerMenu input:checked {
+        opacity: 0;
+        width: 0;
+    }
+    .sideBar {
+        display: flex;
+        position: fixed;
+        top: -40vh;
+        left: 0;
+        flex-direction: column;
+        background-color: #F4F4F4;
+        width: 100vw;
+        height: 40vh;
+        z-index: 4;
+        margin: 0;
+        transition: 200ms ease-in-out;
+    }
+
+    .hamburgerMenu:has(input:checked) + .sideBar {
+        top: 0;
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.5); /* Sombra projetada para baixo */
+    }
+}

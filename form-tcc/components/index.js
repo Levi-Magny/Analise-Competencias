@@ -14,6 +14,16 @@ const QuestionText = styled.h4`
   padding: .5rem;
 `
 
+const BoxItemMobile = styled.div`
+  height: inherit;
+  max-width: 90vh;
+  display: ${(props) => props.visible ? 'none' : 'flex'} ;
+  flex-direction: ${(props) => props.direction};
+  justify-content: center;
+  align-items: center;
+  gap: .2rem;
+`
+
 const Description = styled.div`
   position: absolute;
   z-index: 100;
@@ -43,6 +53,40 @@ const Description = styled.div`
 
   `;
 
+const ModalBox = styled.div`
+  z-index: 100;
+  position: absolute;
+  margin: auto;
+  border: none;
+  border-radius: 1.5rem;
+  width: 90vw;
+  height: 60vh;
+  background: linear-gradient(90deg, #7A5DAB 0%, #423671 100%);
+
+  padding: 1.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  max-height: 15rem; 
+
+  p {
+    font-family: 'Roboto', Helvetica, sans-serif;
+    color: snow;
+  }
+`;
+
+const HorizontalBox = styled.div`
+
+  display: flex;
+  flex-direction: row;
+
+  justifyContent: center;
+  align-items: flex-start;
+  gap: .4rem;
+
+`;
+
 const ContainerPurple = styled.div`
   width: 100%;
   height: ${(props) => props.height || '50vh'}; /* Altura personalizável */
@@ -61,7 +105,7 @@ const ContainerPurple = styled.div`
   }
 
   /* Estilos para telas menores (exemplo: até 768px de largura) */
-  @media (max-width: 768px) {
+  @media (max-width: 900px) {
     height: 100%;
     padding: 0 .5rem .5rem .5rem;
 
@@ -69,7 +113,10 @@ const ContainerPurple = styled.div`
       height: 100vh;
     }
   }
+  @media (max-height: 600px) {
+    height: fit-content;
+  }
 `;
 
 
-export { Layout, ContainerPurple, QuestionText, Description }
+export { Layout, ContainerPurple, BoxItemMobile, QuestionText, Description, ModalBox, HorizontalBox }
