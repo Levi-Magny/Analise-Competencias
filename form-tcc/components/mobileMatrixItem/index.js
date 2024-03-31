@@ -38,7 +38,7 @@ const MobileItemMatrix = ({ children, description, bgcolor, index, onItemClick, 
                         onClick={()=>{setModal(false)}}
                     ><img src='/fechar.svg'/></span>
                     <h4 className={styles.modalTitle}>{children}</h4>
-                    <p>{description}</p>
+                    <p className={styles.modalDescription}>{description}</p>
                 </ModalBox>
             </div>}
         </>
