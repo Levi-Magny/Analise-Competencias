@@ -6,7 +6,7 @@ export default class CompetencesApi {
     }
 
     async getToken() {
-        let response = await fetch('http://ec2-18-228-24-54.sa-east-1.compute.amazonaws.com//token/', {
+        let response = await fetch('http://ec2-18-228-24-54.sa-east-1.compute.amazonaws.com/token/', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -24,7 +24,7 @@ export default class CompetencesApi {
     }
 
     async updateToken(refreshToken){
-        let response = await fetch('http://ec2-18-228-24-54.sa-east-1.compute.amazonaws.com//token/refresh/', {
+        let response = await fetch('http://ec2-18-228-24-54.sa-east-1.compute.amazonaws.com/token/refresh/', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -41,7 +41,7 @@ export default class CompetencesApi {
     }
 
     async get_competences(accessToken) {
-        let response = await fetch('http://ec2-18-228-24-54.sa-east-1.compute.amazonaws.com//api/listar-competencias/', {
+        let response = await fetch('http://ec2-18-228-24-54.sa-east-1.compute.amazonaws.com/api/listar-competencias/', {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -58,7 +58,7 @@ export default class CompetencesApi {
     }
 
     async get_docentes(accessToken) {
-        let response = await fetch('http://ec2-18-228-24-54.sa-east-1.compute.amazonaws.com//api/listar-docentes/', {
+        let response = await fetch('http://ec2-18-228-24-54.sa-east-1.compute.amazonaws.com/api/listar-docentes/', {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
