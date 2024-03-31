@@ -3,39 +3,39 @@
         [
             {
                 "title": "Listar",
-                "description": "Fazer uma síntese do conteúdo apresentado",
+                "description": "O estudante é estimulado a fazer uma síntese do conteúdo apresentado.",
+                "color": "#8CD6FF"
+            },
+            {
+                "title": "Descrever",
+                "description": "Descrever (características, passos, propriedades, etapas, etc.) sobre o assunto.",
+                "color": "#8CD6FF"
+            },
+            {
+                "title": "Recordar ",
+                "description": "O estudante é estimulado a criar familiaridade com o tema de modo que consiga recuperá-lo na memória e citá-lo numa narrativa.",
                 "color": "#8CD6FF"
             },
             {
                 "title": "Reconhecer",
-                "description": "",
-                "color": "#8CD6FF"
-            },
-            {
-                "title": "Lembrar",
-                "description": "",
-                "color": "#8CD6FF"
-            },
-            {
-                "title": "Identificar",
-                "description": "",
+                "description": "O estudante é estimulado a relacionar o conteúdo com outros conceitos prévios e a ser capaz de explicá-lo através de analogias e exemplos.",
                 "color": "#8CD6FF"
             }
         ],
         [
             {
-                "title": "Resumir",
-                "description": "",
+                "title": "Comparar",
+                "description": "O estudante é estimulado a identificar similaridades e diferenças entre conceitos. Providenciando exemplos.",
                 "color": "#95FF8C"
             },
             {
-                "title": "Classificar",
-                "description": "",
+                "title": "Discutir",
+                "description": "O estudante é estimulado a desenvolver senso crítico, baseados nos conhecimentos apresentados.",
                 "color": "#95FF8C"
             },
             {
-                "title": "Esclarecer",
-                "description": "",
+                "title": "Explicar",
+                "description": "O estudante é estimulado a explicar os conceitos com suas próprias palavras, ilustrando o sentido a ideia principal.",
                 "color": "#95FF8C"
             },
             {
@@ -46,7 +46,7 @@
         ],
         [
             {
-                "title": "Responder",
+                "title": "Determinar",
                 "description": "",
                 "color": "#CCFF8C"
             },
