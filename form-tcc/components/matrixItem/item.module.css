@@ -46,13 +46,14 @@
 
 .itemBox:hover {
     position: relative;
-    width: 11rem;
-    height: 10rem;
+    width: 12rem;
+    height: 10.1rem;
     z-index: 100;
     border-radius: .8rem;
 
-    margin: -3.3rem -1.8rem;
+    margin: -3.3rem -12rem;
     box-shadow: 0px 0px 15px #423671;
+    overflow: ellipsis;
 }
 
 .itemBox p {
