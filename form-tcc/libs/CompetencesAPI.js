@@ -97,7 +97,7 @@ export default class CompetencesApi {
     async insert_blooms(accessToken, object) {
         let req_body = this.convert_object(object);
         console.log(req_body);
-        let response = await fetch('https://stuprofile.xyz//api/inserir-blooms/', {
+        let response = await fetch('https://stuprofile.xyz/api/inserir-blooms/', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

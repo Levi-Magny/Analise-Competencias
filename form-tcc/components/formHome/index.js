@@ -71,15 +71,17 @@ const UserInfo = ({setSubmitted}) => {
                                 autoFocus
                                 onChange={(event) => {
                                     let data = formData;
-                                    data.docente = docentesArray[event.target.value-1];
-                                    data.materia = docentesArray[Number(event.target.value-1)].materias[0].id;
+                                    data.docente = docentesArray[Number(event.target.value)];
+                                    console.log(docentesArray)
+                                    data.materia = docentesArray[Number(event.target.value)].materias[0].id;
+                                    console.log(event.target.value);
                                     setDocente(event.target.value);
                                     setFormData(data);
-                                    setMateriaArray(docentesArray[Number(event.target.value-1)].materias);
+                                    setMateriaArray(docentesArray[Number(event.target.value)].materias);
                                 }}
                             >
-                            {docentesArray.map((docente) => (
-                                <MenuItem key={docente.id} value={docente.id}>
+                            {docentesArray.map((docente, index) => (
+                                <MenuItem key={docente.id} value={index}>
                                     {docente.nome.toUpperCase()}
                                 </MenuItem>
                             ))}
