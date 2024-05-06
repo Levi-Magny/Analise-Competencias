@@ -352,6 +352,7 @@ const Questions = () => {
                     }
                   }}
                   onClick={async () => {
+                    setQtdSelected(0);
                     await api.insert_blooms(authTokens.access, formData);
                     rotas.push('/obrigado');
                   }}
