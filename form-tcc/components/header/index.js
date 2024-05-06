@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import styles from './header.module.css';
+import Link from 'next/link';
 
 const MenuItem = styled.div`
     display: flex;
@@ -30,18 +31,18 @@ const Header = () => {
                 </div>
                 <nav className={styles.mainNav}>
                     <ul>
-                        <li><a href="/">Início</a></li>
-                        <li><a href="#">Sobre</a></li>
-                        <li><a href="#">Contato</a></li>
+                        <li><Link href="/">Início</Link></li>
+                        <li><Link href="/sobre">Sobre</Link></li>
+                        <li><Link href="#">Contato</Link></li>
                     </ul>
                 </nav>
                 <label className={styles.hamburgerMenu}>
                     <input type='checkbox'/>
                 </label>
                 <section className={styles.sideBar}>
-                    <MenuItem><span>Início</span></MenuItem>
-                    <MenuItem><span>Sobre</span></MenuItem>
-                    <MenuItem><span>Contato</span></MenuItem>
+                    <MenuItem><Link href="/"><span>Início</span></Link></MenuItem>
+                    <MenuItem><Link href="/sobre"><span>Sobre</span></Link></MenuItem>
+                    <MenuItem><Link href="#"><span>Contato</span></Link></MenuItem>
                 </section>
             </header>
         </>

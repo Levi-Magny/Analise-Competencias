@@ -6,7 +6,7 @@ export default class CompetencesApi {
     }
 
     async getToken() {
-        let response = await fetch('https://stuprofile.xyz/token/', {
+        let response = await fetch('https://web-production-9a4d.up.railway.app/token/', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -24,7 +24,7 @@ export default class CompetencesApi {
     }
 
     async updateToken(refreshToken){
-        let response = await fetch('https://stuprofile.xyz/token/refresh/', {
+        let response = await fetch('https://web-production-9a4d.up.railway.app/token/refresh/', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -41,7 +41,7 @@ export default class CompetencesApi {
     }
 
     async get_competences(accessToken) {
-        let response = await fetch('https://stuprofile.xyz/api/listar-competencias/', {
+        let response = await fetch('https://web-production-9a4d.up.railway.app/api/listar-competencias/', {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -58,7 +58,7 @@ export default class CompetencesApi {
     }
 
     async get_docentes(accessToken) {
-        let response = await fetch('https://stuprofile.xyz/api/listar-docentes/', {
+        let response = await fetch('https://web-production-9a4d.up.railway.app/api/listar-docentes/', {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -96,8 +96,7 @@ export default class CompetencesApi {
 
     async insert_blooms(accessToken, object) {
         let req_body = this.convert_object(object);
-        console.log(req_body);
-        let response = await fetch('https://stuprofile.xyz/api/inserir-blooms/', {
+        let response = await fetch('https://web-production-9a4d.up.railway.app/api/inserir-blooms/', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -106,6 +105,22 @@ export default class CompetencesApi {
             body: req_body
         });
         let data = await response.json();
-        console.log(data);
+    }
+
+    async term_accepted(accessToken, id) {
+        let response = await fetch(`https://web-production-9a4d.up.railway.app/atualizar-termo/?id=${id}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${accessToken}`
+            },
+        });
+        console.log(response);
+        let data = await response.json();
+        
+        return {
+            responseStatus: response.status,
+            docentes: data
+        }
     }
 }

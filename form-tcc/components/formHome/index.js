@@ -2,17 +2,18 @@
 
 import { Box, Button, Container, Grid, MenuItem, capitalize } from "@mui/material"
 import TextField from "@mui/material/TextField"
-import dados from '../../data/materias.json'
-import docentes from '../../data/docentes.json'
 import { useRouter } from 'next/router';
 import { FormContext, useFormContext } from "../../contexts/formcontext";
 import { useContext, useEffect, useLayoutEffect, useState } from "react";
+import Skeleton from "react-loading-skeleton";
+import 'react-loading-skeleton/dist/skeleton.css';
 
 const UserInfo = ({setSubmitted}) => {
     const rotas = useRouter();
     const {formData, setFormData, docente, setDocente, authTokens, api} = useFormContext();
     const [docentesArray, setDocentesArray] = useState(null)
     const [materiaArray, setMateriaArray] = useState(null)
+    const [termoAceito, setTermoAceito] = useState(null)
     
     useEffect(() => {
         const formS = JSON.parse(localStorage.getItem("form"));
@@ -33,7 +34,7 @@ const UserInfo = ({setSubmitted}) => {
     }, [formData, docente])
 
     return (
-        docentesArray && <Container component="main" maxWidth="md">
+        <Container component="main" maxWidth="md">
             <Box 
                 sx={{
                     marginTop:8,
@@ -42,7 +43,7 @@ const UserInfo = ({setSubmitted}) => {
                     alignItems: 'center'
                 }}
             >
-                <Box
+                {docentesArray ? <Box
                     component="form"
                     noValidate
                     sx={{ 
@@ -51,10 +52,7 @@ const UserInfo = ({setSubmitted}) => {
                     }}
                     onSubmit={(event)=>{
                         event.preventDefault();
-                        setSubmitted(true);
-                        setTimeout(() => {
-                        rotas.push('/competencias');
-                        }, 500);
+                        setSubmitted(termoAceito);
                     }}
                 >
                     <Grid container spacing={1} sx={{alignItems: "center", justifyContent: "center"}}>
@@ -72,9 +70,8 @@ const UserInfo = ({setSubmitted}) => {
                                 onChange={(event) => {
                                     let data = formData;
                                     data.docente = docentesArray[Number(event.target.value)];
-                                    console.log(docentesArray)
+                                    setTermoAceito([data.docente.termo_aceito, data.docente.id]);
                                     data.materia = docentesArray[Number(event.target.value)].materias[0].id;
-                                    console.log(event.target.value);
                                     setDocente(event.target.value);
                                     setFormData(data);
                                     setMateriaArray(docentesArray[Number(event.target.value)].materias);
@@ -127,7 +124,14 @@ const UserInfo = ({setSubmitted}) => {
                             </Button>
                         </Grid>
                     </Grid>
-                </Box>
+                </Box> : <Skeleton
+                    height='2.5rem'
+                    width='40vw'
+                    style={{
+                        marginTop: '1rem',
+                    }}
+                    count={2}
+                />}
             </Box>
         </Container>
     )

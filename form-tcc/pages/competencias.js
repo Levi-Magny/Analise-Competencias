@@ -33,7 +33,7 @@ const MainForm = () => {
             <Header/>
             <Title
             title={docente && `Olá, Prof. ${formData.docente.nome.split(' ')[0]}`}
-            subtitle="Selecione o nível abordado na disciplina."
+            subtitle="Para as competências abordadas na disciplina, selecione o nível cobrado do aluno."
             />
             <Questions/>
             <div className={styles.arrow}>
