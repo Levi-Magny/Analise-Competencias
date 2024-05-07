@@ -40,95 +40,95 @@
             },
             {
                 "title": "Predizer",
-                "description": "",
+                "description": "O estudante é estimulado a antecipar resultados com base em informações disponíveis.",
                 "color": "#95FF8C"
             }
         ],
         [
             {
                 "title": "Determinar",
-                "description": "",
+                "description": "O estudante é estimulado a conhecer e dominar as perguntas recorrentes quanto ao conteúdo.",
                 "color": "#CCFF8C"
             },
             {
-                "title": "Fornecer",
-                "description": "",
+                "title": "Prover",
+                "description": "O estudante é estimulado a fornecer suporte a outras pessoas quanto a execuções de tarefas sobre o conteúdo.",
                 "color": "#CCFF8C"
             },
             {
                 "title": "Realizar",
-                "description": "",
+                "description": "O estudante aprendeu técnicas e procedimentos normalmente necessários para colocar o conteúdo em prática.",
                 "color": "#CCFF8C"
             },
             {
                 "title": "Usar",
-                "description": "",
+                "description": "O estudante foi estimulado a utilizar os variados conhecimentos e técnias para execução de projetos reais.",
                 "color": "#CCFF8C"
             }
         ],
         [
             {
                 "title": "Selecionar",
-                "description": "",
+                "description": "O estudante foi estimulado a selecionar informações relevantes para identificar padrões",
                 "color": "#FDFF8C"
             },
             {
                 "title": "Diferenciar",
-                "description": "",
+                "description": "O aluno deve ser capaz de diferenciar conceitos, ideias ou categorias para compreensão mais aprofundada do assunto em questão.",
                 "color": "#FDFF8C"
             },
             {
                 "title": "Integrar",
-                "description": "",
+                "description": "O estudante foi estimulado a integrar processos, combinando-os de forma coerente para resolver problemas complexos",
                 "color": "#FDFF8C"
             },
             {
                 "title": "Desconstruir",
-                "description": "",
+                "description": "O aluno consegue desconstruir e refletir sobre seu próprio pensamento, identificando áreas de melhoria e ajustando sua abordagem para otimizar o desempenho cognitivo.",
                 "color": "#FDFF8C"
             }
         ],
         [
             {
                 "title": "Verificar",
-                "description": "",
+                "description": "O estudante foi estimulado a verificar a precisão e validade das informações, fontes ou dados apresentados, garantindo a confiabilidade.",
                 "color": "#FFCA8C"
             },
             {
                 "title": "Determinar",
-                "description": "",
+                "description": "O aluno deve ser capaz de determinar a relevância e importância de conceitos, teorias ou ideias, identificando sua aplicabilidade e impacto no contexto em questão",
                 "color": "#FFCA8C"
             },
             {
                 "title": "Julgar",
-                "description": "",
+                "description": "O aluno deve ser capaz de julgar a eficácia e adequação de processos, métodos ou abordagens utilizadas, quanto ao alcance de objetivos específicos.",
                 "color": "#FFCA8C"
             },
             {
                 "title": "Refletir",
-                "description": "",
+                "description": "O aluno deve ser capaz de avaliar a eficácia dos seus métodos de verificação, buscando melhorar sua estratégia.",
                 "color": "#FFCA8C"
             }
         ],
         [
             {
                 "title": "Gerar",
-                "description": "",
+                "description": "O estudante foi estimulado a gerar novas informações, ideias ou soluções a partir de dados existentes, demonstrando originalidade e inovação no processo de pensamento.",
                 "color": "#FF938C"
             },
             {
                 "title": "Reunir",
-                "description": "",
+                "description": "O estudante foi estimulado a reunir diferentes conceitos de forma integrada, criando novas abordagens para a resolução de problemas ou desenvolvimento de projetos.",
                 "color": "#FF938C"
             },
             {
                 "title": "Projetar",
-                "description": "",
+                "description": "O aluno deve ser capaz de projetar e implementar soluções inovadoras, combinando diferentes etapas de forma coesa e eficaz para alcançar resultados significativos.",
                 "color": "#FF938C"
             },
             {
                 "title": "Criar",
-                "description": "",
+                "description": "Ser capaz de guiar um pensamento crítico sobre seu próprio processo de criação, identificando oportunidades de melhoria, e explorando novas formas de expressão criativa.",
                 "color": "#FF938C"
             }
         ]
