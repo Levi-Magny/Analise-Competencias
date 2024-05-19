@@ -445,7 +445,6 @@ const Questions = () => {
                 }
               } else {
                 await api.insert_blooms(authTokens.access, { ...formData, compts: compts });
-                console.log({ ...formData, compts: compts })
                 rotas.push('/obrigado')
               }
             }}

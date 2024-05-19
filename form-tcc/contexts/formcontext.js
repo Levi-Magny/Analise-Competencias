@@ -43,7 +43,6 @@ export const FormProvider = ({children}) => {
         }
         let fourMinutes = 4 * 60 * 1000;
         let interval = setInterval(()=>{
-            console.log("update_token");
             if(authTokens){
                 update_token();
             }

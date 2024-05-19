@@ -15,7 +15,6 @@ export default class CompetencesApi {
         });
 
         let data = await response.json();
-        // console.log('Token:', data, "status:", response.status);
         return {
             responseStatus: response.status,
             tokens: data
@@ -50,7 +49,6 @@ export default class CompetencesApi {
         });
 
         let data = await response.json();
-        // console.log("data:", data)
         return {
             responseStatus: response.status,
             competences: data
@@ -83,7 +81,7 @@ export default class CompetencesApi {
                 
                 listaConvertida.push({
                     docente: obj.docente.id,
-                    competencia: parseInt(competencia, 10)+1,
+                    competencia: parseInt(competencia, 10),
                     materia: obj.materia,
                     i_index: iIndex,
                     j_index: jIndex
@@ -115,7 +113,6 @@ export default class CompetencesApi {
                 'Authorization': `Bearer ${accessToken}`
             },
         });
-        console.log(response);
         let data = await response.json();
         
         return {
