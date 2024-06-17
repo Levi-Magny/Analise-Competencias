@@ -65,8 +65,8 @@ const ModalBox = styled.div`
   margin: auto;
   border: none;
   border-radius: 1.5rem;
-  width: 90vw;
-  height: 60vh;
+  width: ${(props) => props.width || '90vw'};
+  height: ${(props) => props.height || '60vh'};
   background: linear-gradient(90deg, #7A5DAB 0%, #423671 100%);
 
   padding: 1.5rem;
@@ -74,7 +74,7 @@ const ModalBox = styled.div`
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  max-height: 15rem; 
+  max-height: ${(props) => props.height || '15rem'}; 
 
   p {
     font-family: 'Roboto', Helvetica, sans-serif;
@@ -124,5 +124,33 @@ const ContainerPurple = styled.div`
   }
 `;
 
+const Tips = styled.span`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 1.5rem;
+  position: fixed;
+  top: 10vh;
+  left: 5vw;
+  padding: 1rem;
+  color: #7A5DAB;
+  font-weight: bold;
+  font-size: 2rem;
+  transition: .2s;
 
-export { Layout, ContainerPurple, BoxItemMobile, QuestionText, Description, ModalBox, HorizontalBox }
+  box-shadow: 0px 4px 8px 1px rgba(0, 0, 0, 0.25);
+  background: linear-gradient(180deg, #fd52fd 0%, #fd52fd 100%);
+
+  cursor: pointer;
+  &:hover{
+    width: 3.2rem;
+    height: 3.2rem;
+    top: 9.8vh;
+    left: 4.8vw;
+    border-radius: 1.6rem;
+  }
+`;
+
+export { Layout, ContainerPurple, BoxItemMobile, QuestionText, Description, ModalBox, HorizontalBox, Tips }

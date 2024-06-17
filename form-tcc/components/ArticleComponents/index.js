@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 const Paragraph = styled.p`
   text-align: justify;
-  text-indent: 1em; /* Espaçamento na primeira linha */
+  text-indent: ${ (props) => props.changeFLine ? '1.2em' : '0'}; /* Espaçamento na primeira linha */
   font-family: "Roboto", helvetica, sans-serif;
   width: 60vw;
 `;
@@ -18,7 +18,7 @@ const ArticleBox = styled.div`
 `;
 
 const ArticleImg = styled.img`
-  width: 40vw;
+  width: ${(props) => props.size || '40vw'};
 `
 
 export { Paragraph, ArticleBox, ArticleImg };

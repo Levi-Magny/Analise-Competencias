@@ -5,13 +5,14 @@ import { pink } from "@mui/material/colors";
 import Check from '@mui/icons-material/Check';
 import StepConnector, { stepConnectorClasses } from '@mui/material/StepConnector';
 
-import { Description, QuestionText, BoxItemMobile, HorizontalBox } from "..";
+import { Description, QuestionText, BoxItemMobile, HorizontalBox, Tips } from "..";
 import { useFormContext } from "../../contexts/formcontext";
 import blooms from '../../data/blooms.json';
 import { useEffect, useState } from "react";
 import { useRouter } from 'next/router';
 import MobileItemMatrix from "../mobileMatrixItem";
 import {CompetenceItem, ScrollableBox} from "../scrollable"
+import Tutorial from "../tutorial";
 // import SceneInit from "../../libs/SceneInit";
 // import * as THREE from 'three'
 
@@ -109,7 +110,8 @@ const Questions = () => {
   const [competences, setCompetences] = useState(null);
   const bloomMatrix = blooms['matrix'];
   const matches = useMediaQuery('(max-width:750px)');
-  const [naoAplica, setNaoAplica] = useState(false)
+  const [naoAplica, setNaoAplica] = useState(false);
+  const [tutorial, setTutorial] = useState(true);
   // const [scene, setScene] = useState(null);
 
   useEffect(() => {
@@ -158,6 +160,9 @@ const Questions = () => {
     }
   }
 
+  const openTutorial = ()=>{
+    setTutorial(true)
+  }
   return (
     <Box
       sx={{
@@ -166,6 +171,8 @@ const Questions = () => {
         alignItems: "center"
       }}
     >
+      <Tips onClick={openTutorial}>?</Tips>
+      <Tutorial modal={tutorial} setModal={setTutorial}>Como preencher?</Tutorial>
       {/* Cabeçalho Mobile */}
       {matches && <Box
         sx={{

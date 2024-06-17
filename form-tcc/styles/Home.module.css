@@ -42,6 +42,11 @@
   margin-top: 3rem;
 }
 
+.contatoImg {
+  width: 180px;
+  border-radius: 50%;
+}
+
 .logo {
   height: 1em;
 }
