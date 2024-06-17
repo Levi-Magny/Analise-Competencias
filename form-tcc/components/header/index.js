@@ -33,7 +33,7 @@ const Header = () => {
                     <ul>
                         <li><Link href="/">Início</Link></li>
                         <li><Link href="/sobre">Sobre</Link></li>
-                        <li><Link href="#">Contato</Link></li>
+                        <li><Link href="/contato">Contato</Link></li>
                     </ul>
                 </nav>
                 <label className={styles.hamburgerMenu}>
@@ -42,7 +42,7 @@ const Header = () => {
                 <section className={styles.sideBar}>
                     <MenuItem><Link href="/"><span>Início</span></Link></MenuItem>
                     <MenuItem><Link href="/sobre"><span>Sobre</span></Link></MenuItem>
-                    <MenuItem><Link href="#"><span>Contato</span></Link></MenuItem>
+                    <MenuItem><Link href="/contato"><span>Contato</span></Link></MenuItem>
                 </section>
             </header>
         </>
